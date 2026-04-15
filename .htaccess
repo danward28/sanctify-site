@@ -1,0 +1,22 @@
+DirectoryIndex index.html
+
+RewriteEngine On
+
+RewriteRule ^pricing-2/?$ /pricing.html [R=301,L]
+RewriteRule ^pricing/?$ /pricing.html [R=301,L]
+RewriteRule ^how-it-works/?$ /how-it-works.html [R=301,L]
+RewriteRule ^for-shepherds/?$ /for-shepherds.html [R=301,L]
+RewriteRule ^about/?$ /about.html [R=301,L]
+RewriteRule ^contact/?$ /contact.html [R=301,L]
+RewriteRule ^signup/?$ /signup.html [R=301,L]
+RewriteRule ^privacy-policy/?$ /privacy-policy.html [R=301,L]
+RewriteRule ^terms/?$ /terms.html [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -193,15 +193,6 @@ p {
   max-width: 610px;
 }
 
-.eyebrow {
-  margin-bottom: 16px;
-  color: var(--brand-dark);
-  font-size: 0.82rem;
-  font-weight: 720;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
 .hero h1 {
   max-width: 680px;
   color: var(--ink);
@@ -457,7 +448,7 @@ p {
   font-weight: 650;
 }
 
-.section-heading p:not(.eyebrow),
+.section-heading p,
 .block-copy p,
 .pricing-copy p {
   margin-top: 18px;
@@ -565,22 +556,15 @@ p {
   opacity: 0.07;
 }
 
-.panel-kicker {
-  color: var(--brand-dark);
-  font-size: 0.82rem;
-  font-weight: 760;
-}
-
 .profile-panel h3 {
   position: relative;
   z-index: 1;
   max-width: 640px;
-  margin-top: 18px;
   font-size: 2.48rem;
   font-weight: 650;
 }
 
-.profile-panel p:not(.panel-kicker) {
+.profile-panel p {
   position: relative;
   z-index: 1;
   max-width: 650px;
@@ -722,10 +706,6 @@ p {
   opacity: 0.06;
 }
 
-.pricing-band .eyebrow {
-  color: #a9e7dc;
-}
-
 .pricing-band p {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -863,7 +843,7 @@ p {
   font-weight: 670;
 }
 
-.subpage-copy p:not(.eyebrow) {
+.subpage-copy p {
   max-width: 630px;
   margin-top: 22px;
   color: #3f4947;
@@ -989,10 +969,6 @@ p {
 
 .page-section.dark p {
   color: rgba(255, 255, 255, 0.72);
-}
-
-.page-section.dark .eyebrow {
-  color: #a9e7dc;
 }
 
 .section-intro {
@@ -1597,7 +1573,7 @@ p {
   }
 
   .hero-lede,
-  .subpage-copy p:not(.eyebrow) {
+  .subpage-copy p {
     font-size: 1.05rem;
   }
 

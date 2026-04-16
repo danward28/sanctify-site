@@ -5,42 +5,36 @@ const profileTabs = document.querySelectorAll(".profile-tab");
 
 const profileContent = {
   evangelical: {
-    kicker: "Evangelical profile",
     title: "Boundaries for discipleship at home.",
     copy:
       "A quieter layer of protection around explicit content, addictive patterns, and media that works against the standards your family is keeping.",
     chips: ["Adult content", "Predatory media", "High-risk searches"],
   },
   mainline: {
-    kicker: "Mainline Protestant profile",
     title: "A thoughtful rhythm for shared screens.",
     copy:
       "A steady filter for explicit content, manipulative media, and digital spaces that pull attention away from peace, service, and worship.",
     chips: ["Explicit media", "Gambling", "Exploitative content"],
   },
   catholic: {
-    kicker: "Catholic profile",
     title: "Care shaped around formation.",
     copy:
       "Support chastity, dignity, family life, and spiritual discipline with a calm path to guidance when someone needs help.",
     chips: ["Adult content", "Occult content", "Addictive platforms"],
   },
   lds: {
-    kicker: "Latter-day Saints profile",
     title: "A quieter internet for covenant homes.",
     copy:
       "A home setting for explicit media, addictive behavior loops, and content that weakens the digital environment at home.",
     chips: ["Explicit media", "Substance content", "Predatory content"],
   },
   jewish: {
-    kicker: "Orthodox Jewish profile",
     title: "A home setting with higher boundaries.",
     copy:
       "Support modesty, family standards, and community accountability across the devices your household shares.",
     chips: ["Immodest media", "Adult content", "Unreviewed video"],
   },
   muslim: {
-    kicker: "Muslim profile",
     title: "A digital layer for a home guided by faith.",
     copy:
       "Help protect attention, modesty, and family values from online patterns that work against a peaceful home.",
@@ -112,16 +106,14 @@ const updateProfile = (profile) => {
   const content = profileContent[profile];
   if (!content) return;
 
-  const kicker = document.querySelector("[data-profile-kicker]");
   const title = document.querySelector("[data-profile-title]");
   const copy = document.querySelector("[data-profile-copy]");
   const chipOne = document.querySelector("[data-chip-one]");
   const chipTwo = document.querySelector("[data-chip-two]");
   const chipThree = document.querySelector("[data-chip-three]");
 
-  if (!kicker || !title || !copy || !chipOne || !chipTwo || !chipThree) return;
+  if (!title || !copy || !chipOne || !chipTwo || !chipThree) return;
 
-  kicker.textContent = content.kicker;
   title.textContent = content.title;
   copy.textContent = content.copy;
   chipOne.textContent = content.chips[0];

@@ -2042,6 +2042,39 @@ p {
   font-weight: 760;
 }
 
+.contact-visual-card {
+  padding: 28px;
+}
+
+.contact-snapshot {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-snapshot-row {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid rgba(18, 108, 102, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.contact-snapshot-row span {
+  color: var(--brand-dark);
+  font-size: 0.76rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-snapshot-row strong {
+  color: var(--ink);
+  font-size: 1.06rem;
+  font-weight: 680;
+  line-height: 1.25;
+}
+
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(340px, 1.14fr);
@@ -2052,9 +2085,11 @@ p {
 .contact-panel {
   display: grid;
   gap: 22px;
-  padding: 30px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 70px rgba(23, 32, 31, 0.08);
 }
 
 .contact-panel div {
@@ -2118,6 +2153,110 @@ p {
 .mock-form .button {
   border: 0;
   cursor: pointer;
+}
+
+.signup-visual-card {
+  padding: 28px;
+}
+
+.signup-hero-card {
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid rgba(18, 108, 102, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(223, 241, 236, 0.64)),
+    var(--white);
+  box-shadow: 0 18px 44px rgba(23, 32, 31, 0.07);
+}
+
+.signup-hero-card strong {
+  color: var(--ink);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.signup-hero-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.signup-choice-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.signup-choice-row {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1px solid rgba(18, 108, 102, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.signup-choice-row span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signup-choice-row strong {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 680;
+}
+
+.signup-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.signup-path-card {
+  display: grid;
+  gap: 14px;
+  min-height: 280px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 20px 60px rgba(23, 32, 31, 0.08);
+}
+
+.signup-path-card.featured {
+  border-color: rgba(18, 108, 102, 0.34);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(223, 241, 236, 0.64)),
+    var(--white);
+  box-shadow: 0 26px 68px rgba(23, 32, 31, 0.12);
+}
+
+.signup-path-label {
+  color: var(--brand-dark);
+  font-size: 0.76rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signup-path-card h3 {
+  font-size: 1.42rem;
+  font-weight: 680;
+}
+
+.signup-path-card p {
+  color: var(--ink-soft);
+}
+
+.signup-path-card .button {
+  align-self: end;
 }
 
 .legal-content {
@@ -2277,6 +2416,7 @@ p {
   .value-grid,
   .included-grid,
   .faq-grid,
+  .signup-path-grid,
   .ai-action-strip,
   .hero-stats,
   .subpage-stat-row,
@@ -2601,9 +2741,14 @@ p {
   .included-item,
   .faq-item,
   .plan-card,
+  .signup-path-card,
   .ai-featured-price,
   .ai-upgrade-cta,
+  .contact-panel,
   .mock-form,
+  .contact-visual-card,
+  .signup-visual-card,
+  .signup-hero-card,
   .legal-content,
   .revenue-band {
     padding: 24px;

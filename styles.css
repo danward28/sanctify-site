@@ -746,6 +746,48 @@ p {
   margin-top: 14px;
 }
 
+.ai-action-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.ai-action {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  min-height: 108px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+}
+
+.ai-action::before {
+  content: "";
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.ai-action span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.76rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-action strong {
+  color: var(--white);
+  font-size: 1.16rem;
+  font-weight: 680;
+  line-height: 1.15;
+}
+
 .ai-chip-list {
   display: flex;
   flex-wrap: wrap;
@@ -1703,7 +1745,8 @@ p {
   .faith-grid,
   .value-grid,
   .included-grid,
-  .faq-grid {
+  .faq-grid,
+  .ai-action-strip {
     grid-template-columns: 1fr;
   }
 
@@ -1922,6 +1965,10 @@ p {
 
   .ai-upgrade-band {
     padding: 24px;
+  }
+
+  .ai-action {
+    min-height: auto;
   }
 
   .profile-tabs {

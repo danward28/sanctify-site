@@ -741,6 +741,35 @@ p {
   font-size: 1.03rem;
 }
 
+.ai-subline {
+  max-width: 30rem;
+  margin-top: 14px;
+}
+
+.ai-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.ai-chip-list-compact {
+  margin-top: 10px;
+}
+
+.ai-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
 .ai-actions {
   display: flex;
   flex-wrap: wrap;
@@ -753,6 +782,18 @@ p {
   margin-top: 14px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.92rem;
+}
+
+.ai-stage-label {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.77rem;
+  font-weight: 760;
+  text-transform: uppercase;
 }
 
 .ai-stage {
@@ -788,6 +829,10 @@ p {
   color: rgba(255, 255, 255, 0.74);
   font-size: 1rem;
   font-weight: 650;
+}
+
+.ai-price-note {
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .ai-signal-grid {

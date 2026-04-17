@@ -682,6 +682,147 @@ p {
   border-right: 0;
 }
 
+.ai-spotlight,
+.ai-upgrade-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-spotlight {
+  color: var(--white);
+  background: linear-gradient(120deg, #171d1c 0%, #126c66 55%, #e46c62 100%);
+}
+
+.ai-spotlight::before,
+.ai-upgrade-band::before {
+  content: "";
+  position: absolute;
+  right: max(24px, calc((100vw - var(--content)) / 2));
+  bottom: -38px;
+  width: 340px;
+  height: 138px;
+  background: url("assets/sanctify-logo-transparent.png") center / contain no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.ai-spotlight-grid,
+.ai-upgrade-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(280px, 0.98fr);
+  gap: 36px;
+  align-items: center;
+}
+
+.ai-spotlight-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.ai-kicker {
+  display: block;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.8rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-spotlight h2,
+.ai-upgrade-band h2 {
+  font-size: 3rem;
+  font-weight: 650;
+}
+
+.ai-spotlight p,
+.ai-upgrade-band p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.03rem;
+}
+
+.ai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.ai-note {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.92rem;
+}
+
+.ai-stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+}
+
+.ai-featured-price,
+.ai-upgrade-cta {
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 22px 60px rgba(23, 32, 31, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.ai-featured-price strong,
+.ai-upgrade-cta strong {
+  color: var(--white);
+  font-size: 3.35rem;
+  font-weight: 720;
+  line-height: 0.92;
+}
+
+.ai-featured-price strong span,
+.ai-upgrade-cta strong span {
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.ai-signal-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-signal {
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ai-signal strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--white);
+  font-size: 1.08rem;
+  font-weight: 680;
+}
+
+.ai-signal span {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.ai-upgrade-band {
+  padding: 42px;
+  border: 1px solid rgba(18, 108, 102, 0.16);
+  border-radius: 8px;
+  background: linear-gradient(120deg, #171d1c 0%, #126c66 58%, #ba8d32 100%);
+  color: var(--white);
+  box-shadow: 0 26px 70px rgba(23, 32, 31, 0.12);
+}
+
 .pricing-band {
   position: relative;
   display: grid;
@@ -1438,6 +1579,8 @@ p {
   .profile-console,
   .block-moment,
   .pricing-band,
+  .ai-spotlight-grid,
+  .ai-upgrade-band,
   .subpage-hero,
   .content-split,
   .blocked-grid,
@@ -1564,6 +1707,8 @@ p {
   .hero h1,
   .subpage-copy h1,
   .section-heading h2,
+  .ai-spotlight h2,
+  .ai-upgrade-band h2,
   .block-copy h2,
   .pricing-copy h2,
   .section-intro h2,
@@ -1660,6 +1805,8 @@ p {
   .hero h1,
   .subpage-copy h1,
   .section-heading h2,
+  .ai-spotlight h2,
+  .ai-upgrade-band h2,
   .block-copy h2,
   .pricing-copy h2,
   .section-intro h2,
@@ -1728,6 +1875,10 @@ p {
     padding-right: 18px;
   }
 
+  .ai-upgrade-band {
+    padding: 24px;
+  }
+
   .profile-tabs {
     grid-template-columns: 1fr;
   }
@@ -1772,6 +1923,8 @@ p {
   .included-item,
   .faq-item,
   .plan-card,
+  .ai-featured-price,
+  .ai-upgrade-cta,
   .mock-form,
   .legal-content,
   .revenue-band {
@@ -1783,7 +1936,9 @@ p {
   }
 
   .price-line strong,
-  .revenue-number strong {
+  .revenue-number strong,
+  .ai-featured-price strong,
+  .ai-upgrade-cta strong {
     font-size: 3rem;
   }
 }

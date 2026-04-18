@@ -1,7 +1,27 @@
+const TRACKED_QUERY_PARAMS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "gclid",
+  "fbclid",
+  "msclkid",
+  "ref",
+];
+const ATTRIBUTION_STORAGE_KEYS = {
+  firstTouch: "sanctify:first-touch",
+  lastTouch: "sanctify:last-touch",
+};
+const APP_SIGNUP_HOST = "app.sanctify.faith";
 const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector(".menu-toggle");
 const heroStage = document.querySelector("[data-tilt] .hero-stage");
 const profileTabs = document.querySelectorAll(".profile-tab");
+const currentPagePath = window.location.pathname || "/";
+const currentPage = currentPagePath.split("/").pop() || "index.html";
+const currentPageName = currentPage === "index.html" ? "home" : currentPage.replace(".html", "");
+const dataLayer = (window.dataLayer = window.dataLayer || []);
 
 const profileContent = {
   evangelical: {
@@ -42,6 +62,194 @@ const profileContent = {
   },
 };
 
+const safeReadStorage = (key) => {
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+};
+
+const safeWriteStorage = (key, value) => {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (error) {
+    // Ignore storage failures in private browsing or restricted contexts.
+  }
+};
+
+const parseStoredValue = (key) => {
+  const value = safeReadStorage(key);
+  if (!value) return null;
+
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return null;
+  }
+};
+
+const isExternalReferrer = (referrer) => {
+  if (!referrer) return false;
+
+  try {
+    return new URL(referrer).origin !== window.location.origin;
+  } catch (error) {
+    return false;
+  }
+};
+
+const getTrackedParams = (searchParams = new URLSearchParams(window.location.search)) => {
+  const params = {};
+
+  TRACKED_QUERY_PARAMS.forEach((key) => {
+    const value = searchParams.get(key);
+    if (value) {
+      params[key] = value;
+    }
+  });
+
+  return params;
+};
+
+const buildAttributionSnapshot = () => ({
+  page: `${window.location.pathname}${window.location.search}`,
+  title: document.title,
+  referrer: document.referrer || "",
+  timestamp: new Date().toISOString(),
+  params: getTrackedParams(),
+});
+
+const persistAttribution = () => {
+  const snapshot = buildAttributionSnapshot();
+  const hasTrackedParams = Object.keys(snapshot.params).length > 0;
+  const hasExternalSource = hasTrackedParams || isExternalReferrer(snapshot.referrer);
+  const firstTouch = parseStoredValue(ATTRIBUTION_STORAGE_KEYS.firstTouch) || snapshot;
+  const lastTouch =
+    hasExternalSource || !parseStoredValue(ATTRIBUTION_STORAGE_KEYS.lastTouch)
+      ? snapshot
+      : parseStoredValue(ATTRIBUTION_STORAGE_KEYS.lastTouch);
+
+  safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.firstTouch, JSON.stringify(firstTouch));
+  safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.lastTouch, JSON.stringify(lastTouch));
+
+  return {
+    firstTouch,
+    lastTouch,
+    current: snapshot,
+  };
+};
+
+const attributionState = persistAttribution();
+
+const mergedAttributionParams = () => ({
+  ...(attributionState.firstTouch?.params || {}),
+  ...(attributionState.lastTouch?.params || {}),
+  ...(attributionState.current?.params || {}),
+});
+
+const serializeSnapshot = (snapshot) => {
+  if (!snapshot) return "";
+
+  const paramSummary = Object.entries(snapshot.params || {})
+    .map(([key, value]) => `${key}=${value}`)
+    .join(", ");
+
+  return [
+    snapshot.page ? `page=${snapshot.page}` : "",
+    snapshot.referrer ? `referrer=${snapshot.referrer}` : "",
+    paramSummary ? `params=${paramSummary}` : "",
+    snapshot.timestamp ? `captured=${snapshot.timestamp}` : "",
+  ]
+    .filter(Boolean)
+    .join(" | ");
+};
+
+const trackEvent = (eventName, detail = {}) => {
+  const payload = {
+    event: eventName,
+    page_name: currentPageName,
+    page_path: currentPagePath,
+    page_title: document.title,
+    ...detail,
+  };
+
+  dataLayer.push(payload);
+  window.dispatchEvent(new CustomEvent("sanctify:track", { detail: payload }));
+
+  return payload;
+};
+
+const enrichSignupLinks = () => {
+  const attributionParams = mergedAttributionParams();
+
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    let url;
+
+    try {
+      url = new URL(href, window.location.href);
+    } catch (error) {
+      return;
+    }
+
+    if (url.hostname !== APP_SIGNUP_HOST || !url.pathname.startsWith("/signup")) {
+      return;
+    }
+
+    Object.entries(attributionParams).forEach(([key, value]) => {
+      if (value && !url.searchParams.has(key)) {
+        url.searchParams.set(key, value);
+      }
+    });
+
+    if (!url.searchParams.has("origin_page")) {
+      url.searchParams.set("origin_page", currentPageName);
+    }
+
+    if (link.dataset.track && !url.searchParams.has("cta")) {
+      url.searchParams.set("cta", link.dataset.track);
+    }
+
+    link.href = url.toString();
+  });
+};
+
+const populateAttributionFields = () => {
+  const attributionParams = mergedAttributionParams();
+
+  document.querySelectorAll("[data-attribution-field]").forEach((input) => {
+    const field = input.dataset.attributionField;
+    if (!field) return;
+
+    if (field === "first_touch") {
+      input.value = serializeSnapshot(attributionState.firstTouch);
+      return;
+    }
+
+    if (field === "last_touch") {
+      input.value = serializeSnapshot(attributionState.lastTouch);
+      return;
+    }
+
+    if (field === "origin_page") {
+      input.value = currentPageName;
+      return;
+    }
+
+    input.value = attributionParams[field] || "";
+  });
+};
+
+enrichSignupLinks();
+populateAttributionFields();
+trackEvent("page_view", {
+  landing_page: attributionState.firstTouch?.page || currentPagePath,
+  last_touch_page: attributionState.lastTouch?.page || currentPagePath,
+});
+
 const setHeaderState = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 12);
 };
@@ -67,7 +275,6 @@ document.querySelectorAll(".site-nav a").forEach((link) => {
   });
 });
 
-const currentPage = window.location.pathname.split("/").pop() || "index.html";
 document.querySelectorAll(".site-nav a, .footer-links a").forEach((link) => {
   const linkPage = link.getAttribute("href")?.split("#")[0];
   if (linkPage === currentPage) {
@@ -133,3 +340,32 @@ profileTabs.forEach((tab) => {
     updateProfile(tab.dataset.profile);
   });
 });
+
+document.querySelectorAll("[data-track]").forEach((element) => {
+  element.addEventListener("click", () => {
+    trackEvent(element.dataset.track, {
+      surface: element.dataset.surface || "",
+      plan: element.dataset.plan || "",
+      destination: element.getAttribute("href") || "",
+      label: element.dataset.label || element.textContent?.trim() || "",
+    });
+  });
+});
+
+const trackedForm = document.querySelector("form[data-track-submit]");
+
+if (trackedForm) {
+  trackedForm.addEventListener("submit", () => {
+    const topicField = trackedForm.querySelector('[name="topic"]');
+
+    trackEvent(trackedForm.dataset.trackSubmit, {
+      surface: trackedForm.dataset.surface || currentPageName,
+      topic: topicField?.value || "",
+    });
+  });
+}
+
+window.sanctifyTracking = {
+  attribution: attributionState,
+  trackEvent,
+};

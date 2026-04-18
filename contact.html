@@ -7,6 +7,19 @@
       name="description"
       content="Contact Sanctify for family support, shepherd partnerships, and organization onboarding."
     />
+    <link rel="canonical" href="https://sanctify.faith/contact.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contact | Sanctify" />
+    <meta
+      property="og:description"
+      content="Reach the Sanctify team for family support, shepherd partnerships, and organization onboarding."
+    />
+    <meta property="og:url" content="https://sanctify.faith/contact.html" />
+    <meta
+      property="og:image"
+      content="https://sanctify.faith/assets/dashboard-mockup.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Contact | Sanctify</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -26,10 +39,20 @@
         <a href="for-shepherds.html">For shepherds</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a class="mobile-nav-cta" href="https://app.sanctify.faith/signup">Get started</a>
+        <a
+          class="mobile-nav-cta"
+          href="https://app.sanctify.faith/signup"
+          data-track="nav_get_started_click"
+          data-surface="mobile_nav"
+        >Get started</a>
       </nav>
 
-      <a class="header-cta" href="https://app.sanctify.faith/signup">Get started</a>
+      <a
+        class="header-cta"
+        href="https://app.sanctify.faith/signup"
+        data-track="nav_get_started_click"
+        data-surface="header"
+      >Get started</a>
     </header>
 
     <main class="page-main">
@@ -48,7 +71,12 @@
             send a note and the team will follow up.
           </p>
           <div class="subpage-actions">
-            <a class="button primary" href="mailto:info@sanctify.faith">Email us</a>
+            <a
+              class="button primary"
+              href="mailto:info@sanctify.faith"
+              data-track="contact_email_click"
+              data-surface="contact_hero"
+            >Email us</a>
             <a class="button secondary" href="pricing.html">See pricing</a>
           </div>
           <div class="subpage-brief">
@@ -94,7 +122,13 @@
           <aside class="contact-panel reveal">
             <div>
               <h3>Email</h3>
-              <p><a href="mailto:info@sanctify.faith">info@sanctify.faith</a></p>
+              <p>
+                <a
+                  href="mailto:info@sanctify.faith"
+                  data-track="contact_email_click"
+                  data-surface="contact_sidebar"
+                >info@sanctify.faith</a>
+              </p>
             </div>
             <div>
               <h3>Typical response time</h3>
@@ -106,7 +140,14 @@
             </div>
           </aside>
 
-          <form class="mock-form reveal" action="mailto:info@sanctify.faith" method="post" enctype="text/plain">
+          <form
+            class="mock-form reveal"
+            action="mailto:info@sanctify.faith"
+            method="post"
+            enctype="text/plain"
+            data-track-submit="contact_submit"
+            data-surface="contact_form"
+          >
             <div class="field-grid">
               <label>
                 Name
@@ -143,6 +184,19 @@
                 required
               ></textarea>
             </label>
+
+            <input type="hidden" name="utm_source" data-attribution-field="utm_source" />
+            <input type="hidden" name="utm_medium" data-attribution-field="utm_medium" />
+            <input type="hidden" name="utm_campaign" data-attribution-field="utm_campaign" />
+            <input type="hidden" name="utm_content" data-attribution-field="utm_content" />
+            <input type="hidden" name="utm_term" data-attribution-field="utm_term" />
+            <input type="hidden" name="gclid" data-attribution-field="gclid" />
+            <input type="hidden" name="fbclid" data-attribution-field="fbclid" />
+            <input type="hidden" name="msclkid" data-attribution-field="msclkid" />
+            <input type="hidden" name="ref" data-attribution-field="ref" />
+            <input type="hidden" name="origin_page" data-attribution-field="origin_page" />
+            <input type="hidden" name="first_touch" data-attribution-field="first_touch" />
+            <input type="hidden" name="last_touch" data-attribution-field="last_touch" />
 
             <button class="button primary" type="submit">Get in touch</button>
             <p class="plan-note">

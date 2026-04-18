@@ -7,8 +7,80 @@
       name="description"
       content="Sanctify pricing includes a 7-day free trial, household protection, and recurring support for participating faith organizations."
     />
+    <link rel="canonical" href="https://sanctify.faith/pricing.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pricing | Sanctify" />
+    <meta
+      property="og:description"
+      content="See Sanctify pricing, annual savings, extra device packs, and the Smart Filter AI upgrade."
+    />
+    <meta property="og:url" content="https://sanctify.faith/pricing.html" />
+    <meta
+      property="og:image"
+      content="https://sanctify.faith/assets/dashboard-mockup.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Pricing | Sanctify</title>
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Product",
+            "name": "Sanctify household protection",
+            "description": "Faith-guided internet protection for up to 15 household devices with optional Smart Filter AI.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Sanctify"
+            },
+            "offers": [
+              {
+                "@type": "Offer",
+                "priceCurrency": "USD",
+                "price": "9.99",
+                "url": "https://app.sanctify.faith/signup?plan=monthly&checkout=1"
+              },
+              {
+                "@type": "Offer",
+                "priceCurrency": "USD",
+                "price": "95.88",
+                "url": "https://app.sanctify.faith/signup?plan=annual&checkout=1"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How does the free trial work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sign up and get full access for 7 days with no credit card required. Choose monthly or annual afterward, or let the trial expire."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many devices can I protect?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Each family account supports up to 15 devices. Add another 15 devices for $3 per month or $36 per year."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is Smart Filter AI?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is the premium upgrade that helps Sanctify keep up as new sites appear and stay aligned with your family's faith."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="site-header" data-header>
@@ -26,10 +98,20 @@
         <a href="for-shepherds.html">For shepherds</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a class="mobile-nav-cta" href="https://app.sanctify.faith/signup">Get started</a>
+        <a
+          class="mobile-nav-cta"
+          href="https://app.sanctify.faith/signup"
+          data-track="nav_get_started_click"
+          data-surface="mobile_nav"
+        >Get started</a>
       </nav>
 
-      <a class="header-cta" href="https://app.sanctify.faith/signup">Get started</a>
+      <a
+        class="header-cta"
+        href="https://app.sanctify.faith/signup"
+        data-track="nav_get_started_click"
+        data-surface="header"
+      >Get started</a>
     </header>
 
     <main class="page-main">
@@ -51,7 +133,13 @@
             Start with a 7-day free trial, no credit card required.
           </p>
           <div class="subpage-actions">
-            <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&checkout=1">Start free trial</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup?plan=annual&checkout=1"
+              data-track="pricing_annual_click"
+              data-surface="pricing_hero"
+              data-plan="annual"
+            >Start free trial</a>
             <a class="button secondary" href="#ai-upgrade">See Smart Filter AI</a>
           </div>
           <div class="subpage-brief">
@@ -126,7 +214,13 @@
               <span>/month</span>
             </div>
             <p class="plan-note">Full household protection after the 7-day free trial.</p>
-            <a class="button secondary" href="https://app.sanctify.faith/signup?plan=monthly&checkout=1">Start free trial</a>
+            <a
+              class="button secondary"
+              href="https://app.sanctify.faith/signup?plan=monthly&checkout=1"
+              data-track="pricing_monthly_click"
+              data-surface="pricing_plan_monthly"
+              data-plan="monthly"
+            >Start free trial</a>
           </article>
 
           <article class="plan-card featured">
@@ -140,7 +234,13 @@
               <span>/month</span>
             </div>
             <p class="plan-note">$95.88 billed annually after the 7-day free trial.</p>
-            <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&checkout=1">Start free trial</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup?plan=annual&checkout=1"
+              data-track="pricing_annual_click"
+              data-surface="pricing_plan_annual"
+              data-plan="annual"
+            >Start free trial</a>
           </article>
         </div>
         <div class="section-intro reveal" style="margin-top: 2rem">
@@ -190,7 +290,13 @@
                 <i></i>
               </div>
             </div>
-            <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1">Choose annual + AI</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1"
+              data-track="ai_upgrade_click"
+              data-surface="pricing_ai_upgrade"
+              data-plan="annual_ai"
+            >Choose annual + AI</a>
           </div>
         </div>
       </section>
@@ -302,7 +408,13 @@
             Start your 7-day free trial today. By signing up, you agree to the Terms of Service and
             Privacy Policy.
           </p>
-          <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&checkout=1">Get started free</a>
+          <a
+            class="button primary"
+            href="https://app.sanctify.faith/signup?plan=annual&checkout=1"
+            data-track="pricing_annual_click"
+            data-surface="pricing_footer"
+            data-plan="annual"
+          >Get started free</a>
         </div>
       </section>
     </main>

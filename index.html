@@ -7,8 +7,54 @@
       name="description"
       content="Sanctify filters the internet according to your family's faith tradition."
     />
+    <link rel="canonical" href="https://sanctify.faith/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sanctify | Internet protection, guided by faith" />
+    <meta
+      property="og:description"
+      content="Faith-guided internet protection for families who want a calmer online environment at home."
+    />
+    <meta property="og:url" content="https://sanctify.faith/" />
+    <meta
+      property="og:image"
+      content="https://sanctify.faith/assets/dashboard-mockup.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Sanctify | Internet protection, guided by faith</title>
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Sanctify",
+            "url": "https://sanctify.faith",
+            "logo": "https://sanctify.faith/assets/sanctify-logo-transparent.png",
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "email": "info@sanctify.faith"
+              }
+            ]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Sanctify",
+            "applicationCategory": "SecurityApplication",
+            "operatingSystem": "iOS, Android, Web",
+            "url": "https://sanctify.faith",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "USD",
+              "price": "9.99"
+            },
+            "description": "Faith-guided internet protection for homes that want filtering aligned with their values."
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="site-header" data-header>
@@ -26,10 +72,20 @@
         <a href="for-shepherds.html">For shepherds</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a class="mobile-nav-cta" href="https://app.sanctify.faith/signup">Get started</a>
+        <a
+          class="mobile-nav-cta"
+          href="https://app.sanctify.faith/signup"
+          data-track="nav_get_started_click"
+          data-surface="mobile_nav"
+        >Get started</a>
       </nav>
 
-      <a class="header-cta" href="https://app.sanctify.faith/signup">Get started</a>
+      <a
+        class="header-cta"
+        href="https://app.sanctify.faith/signup"
+        data-track="nav_get_started_click"
+        data-surface="header"
+      >Get started</a>
     </header>
 
     <main>
@@ -48,7 +104,12 @@
             the screens your home already uses.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="https://app.sanctify.faith/signup">Start free trial</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup"
+              data-track="hero_cta_click"
+              data-surface="home_hero"
+            >Start free trial</a>
             <a class="button secondary" href="how-it-works.html">How it works</a>
           </div>
           <div class="hero-brief">
@@ -78,10 +139,18 @@
             </div>
           </div>
           <div class="store-badges" aria-label="App download options">
-            <a href="https://app.sanctify.faith/signup">
+            <a
+              href="https://app.sanctify.faith/signup"
+              data-track="hero_cta_click"
+              data-surface="home_app_store_badge"
+            >
               <img src="assets/app-store.svg" alt="Download on the App Store" />
             </a>
-            <a href="https://app.sanctify.faith/signup">
+            <a
+              href="https://app.sanctify.faith/signup"
+              data-track="hero_cta_click"
+              data-surface="home_google_play_badge"
+            >
               <img src="assets/google-play.png" alt="Get it on Google Play" />
             </a>
           </div>
@@ -146,7 +215,13 @@
               </div>
             </div>
             <div class="ai-actions">
-              <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1">Choose annual + AI</a>
+              <a
+                class="button primary"
+                href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1"
+                data-track="ai_upgrade_click"
+                data-surface="home_ai_spotlight"
+                data-plan="annual_ai"
+              >Choose annual + AI</a>
             </div>
           </div>
 
@@ -338,7 +413,12 @@
           <span class="price">$9.99</span>
           <span class="term">per month</span>
           <p class="plan-note">Most complete setup: annual billing plus Smart Filter AI. Extra device packs are $3/month for each additional 15 devices.</p>
-          <a class="button primary" href="https://app.sanctify.faith/signup">Start free trial</a>
+          <a
+            class="button primary"
+            href="https://app.sanctify.faith/signup"
+            data-track="cta_click"
+            data-surface="home_pricing_band"
+          >Start free trial</a>
           <a class="text-link" href="pricing.html">See plans and upgrades</a>
         </div>
       </section>

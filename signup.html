@@ -7,6 +7,19 @@
       name="description"
       content="Start with Sanctify and choose the path that fits your household or faith community."
     />
+    <link rel="canonical" href="https://sanctify.faith/signup.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Get Started | Sanctify" />
+    <meta
+      property="og:description"
+      content="Choose the Sanctify path that fits your household, premium setup, or shepherd partnership."
+    />
+    <meta property="og:url" content="https://sanctify.faith/signup.html" />
+    <meta
+      property="og:image"
+      content="https://sanctify.faith/assets/dashboard-mockup.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Get Started | Sanctify</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -26,10 +39,20 @@
         <a href="for-shepherds.html">For shepherds</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a class="mobile-nav-cta" href="https://app.sanctify.faith/signup">Get started</a>
+        <a
+          class="mobile-nav-cta"
+          href="https://app.sanctify.faith/signup"
+          data-track="nav_get_started_click"
+          data-surface="mobile_nav"
+        >Get started</a>
       </nav>
 
-      <a class="header-cta" href="https://app.sanctify.faith/signup">Get started</a>
+      <a
+        class="header-cta"
+        href="https://app.sanctify.faith/signup"
+        data-track="nav_get_started_click"
+        data-surface="header"
+      >Get started</a>
     </header>
 
     <main class="page-main">
@@ -48,7 +71,13 @@
             straight to annual + AI, or begin a shepherd conversation.
           </p>
           <div class="subpage-actions">
-            <a class="button primary" href="https://app.sanctify.faith/signup?plan=monthly&checkout=1">Start free trial</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup?plan=monthly&checkout=1"
+              data-track="start_page_path_click"
+              data-surface="signup_hero_family"
+              data-plan="monthly"
+            >Start free trial</a>
             <a class="button secondary" href="pricing.html">See pricing</a>
           </div>
           <div class="subpage-brief">
@@ -105,19 +134,36 @@
             <span class="signup-path-label">Family</span>
             <h3>Start the standard household plan.</h3>
             <p>Begin with the 7-day trial and protect up to 15 devices before add-ons.</p>
-            <a class="button secondary" href="https://app.sanctify.faith/signup?plan=monthly&checkout=1">Start family trial</a>
+            <a
+              class="button secondary"
+              href="https://app.sanctify.faith/signup?plan=monthly&checkout=1"
+              data-track="start_page_path_click"
+              data-surface="signup_family_path"
+              data-plan="monthly"
+            >Start family trial</a>
           </article>
           <article class="signup-path-card featured">
             <span class="signup-path-label">Most chosen</span>
             <h3>Go straight to annual + AI.</h3>
             <p>Take the premium path with annual pricing and Smart Filter AI already selected.</p>
-            <a class="button primary" href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1">Choose annual + AI</a>
+            <a
+              class="button primary"
+              href="https://app.sanctify.faith/signup?plan=annual&ai=1&checkout=1"
+              data-track="start_page_path_click"
+              data-surface="signup_ai_path"
+              data-plan="annual_ai"
+            >Choose annual + AI</a>
           </article>
           <article class="signup-path-card">
             <span class="signup-path-label">Shepherd</span>
             <h3>Launch with your congregation.</h3>
             <p>Start a shepherd conversation for recurring support and family protection in one program.</p>
-            <a class="button secondary" href="contact.html">Talk with the team</a>
+            <a
+              class="button secondary"
+              href="contact.html"
+              data-track="shepherd_cta_click"
+              data-surface="signup_shepherd_path"
+            >Talk with the team</a>
           </article>
         </div>
       </section>

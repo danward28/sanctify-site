@@ -13,6 +13,10 @@ const ATTRIBUTION_STORAGE_KEYS = {
   firstTouch: "sanctify:first-touch",
   lastTouch: "sanctify:last-touch",
 };
+const CONSENT_STORAGE_KEYS = {
+  local: "sanctify:tracking-consent:v1",
+  cookie: "sanctify_tracking_consent_v1",
+};
 const APP_SIGNUP_HOST = "app.sanctify.faith";
 const POSTHOG_PROJECT_KEY = "phc_wrdQPfbQNZBPemwgKJmripmKxvKRAMRXYkNNsyvC3jNk";
 const POSTHOG_API_HOST = "https://us.i.posthog.com";
@@ -24,80 +28,19 @@ const currentPagePath = window.location.pathname || "/";
 const currentPage = currentPagePath.split("/").pop() || "index.html";
 const currentPageName = currentPage === "index.html" ? "home" : currentPage.replace(".html", "");
 const dataLayer = (window.dataLayer = window.dataLayer || []);
-
-const shouldLoadPostHog = () => {
-  const hostname = window.location.hostname;
-  if (!hostname) return false;
-  return hostname !== "localhost" && !hostname.startsWith("127.") && !hostname.endsWith(".local");
+let posthog = null;
+let posthogInitialized = false;
+let pageViewTracked = false;
+let consentBannerMounted = false;
+let consentBannerOpen = false;
+let consentBanner = null;
+let consentBannerStatus = null;
+let consentManageButton = null;
+let attributionState = {
+  firstTouch: null,
+  lastTouch: null,
+  current: null,
 };
-
-const initPostHog = () => {
-  if (!shouldLoadPostHog()) return null;
-
-  !(function (t, e) {
-    let o;
-    let n;
-    let p;
-    let r;
-    if (e.__SV) return;
-    window.posthog = e;
-    e._i = [];
-    e.init = function (i, s, a) {
-      const g = function (target, methodName) {
-        const parts = methodName.split(".");
-        if (parts.length === 2) {
-          target = target[parts[0]];
-          methodName = parts[1];
-        }
-        target[methodName] = function () {
-          target.push([methodName].concat(Array.prototype.slice.call(arguments, 0)));
-        };
-      };
-      p = t.createElement("script");
-      p.type = "text/javascript";
-      p.crossOrigin = "anonymous";
-      p.async = true;
-      p.src = `${s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com")}/static/array.js`;
-      r = t.getElementsByTagName("script")[0];
-      r.parentNode.insertBefore(p, r);
-      const instance = a !== undefined ? (e[a] = []) : e;
-      if (a === undefined) a = "posthog";
-      instance.people = instance.people || [];
-      instance.toString = function (withStub) {
-        let name = "posthog";
-        if (a !== "posthog") name += `.${a}`;
-        if (!withStub) name += " (stub)";
-        return name;
-      };
-      instance.people.toString = function () {
-        return `${instance.toString(1)}.people (stub)`;
-      };
-      const methods =
-        "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(
-          " "
-        );
-      for (o = 0; o < methods.length; o += 1) {
-        g(instance, methods[o]);
-      }
-      e._i.push([i, s, a]);
-    };
-    e.__SV = 1;
-  })(document, window.posthog || []);
-
-  window.posthog.init(POSTHOG_PROJECT_KEY, {
-    api_host: POSTHOG_API_HOST,
-    defaults: "2026-01-30",
-    autocapture: false,
-    capture_dead_clicks: false,
-    disable_session_recording: true,
-    enable_heatmaps: false,
-    persistence: "localStorage+cookie",
-  });
-
-  return window.posthog;
-};
-
-const posthog = initPostHog();
 
 const profileContent = {
   evangelical: {
@@ -154,6 +97,20 @@ const safeWriteStorage = (key, value) => {
   }
 };
 
+const safeRemoveStorage = (key) => {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (error) {
+    // Ignore storage failures in private browsing or restricted contexts.
+  }
+};
+
+const shouldLoadPostHog = () => {
+  const hostname = window.location.hostname;
+  if (!hostname) return false;
+  return hostname !== "localhost" && !hostname.startsWith("127.") && !hostname.endsWith(".local");
+};
+
 const parseStoredValue = (key) => {
   const value = safeReadStorage(key);
   if (!value) return null;
@@ -163,6 +120,52 @@ const parseStoredValue = (key) => {
   } catch (error) {
     return null;
   }
+};
+
+const readCookie = (name) => {
+  const cookies = document.cookie ? document.cookie.split("; ") : [];
+  const prefix = `${name}=`;
+  const match = cookies.find((cookie) => cookie.startsWith(prefix));
+  return match ? decodeURIComponent(match.slice(prefix.length)) : "";
+};
+
+const canUseSharedConsentCookie = () => /(^|\.)sanctify\.faith$/i.test(window.location.hostname || "");
+
+const writeConsentCookie = (value) => {
+  const parts = [
+    `${CONSENT_STORAGE_KEYS.cookie}=${encodeURIComponent(value)}`,
+    "Path=/",
+    "Max-Age=31536000",
+    "SameSite=Lax",
+  ];
+
+  if (canUseSharedConsentCookie()) {
+    parts.push("Domain=.sanctify.faith");
+  }
+
+  if (window.location.protocol === "https:") {
+    parts.push("Secure");
+  }
+
+  document.cookie = parts.join("; ");
+};
+
+const readTrackingConsent = () => {
+  const stored = safeReadStorage(CONSENT_STORAGE_KEYS.local) || readCookie(CONSENT_STORAGE_KEYS.cookie);
+  if (stored === "granted" || stored === "denied") return stored;
+  return "unknown";
+};
+
+const writeTrackingConsent = (value) => {
+  safeWriteStorage(CONSENT_STORAGE_KEYS.local, value);
+  writeConsentCookie(value);
+};
+
+const hasTrackingConsent = () => readTrackingConsent() === "granted";
+
+const clearStoredAttribution = () => {
+  safeRemoveStorage(ATTRIBUTION_STORAGE_KEYS.firstTouch);
+  safeRemoveStorage(ATTRIBUTION_STORAGE_KEYS.lastTouch);
 };
 
 const isExternalReferrer = (referrer) => {
@@ -196,18 +199,28 @@ const buildAttributionSnapshot = () => ({
   params: getTrackedParams(),
 });
 
-const persistAttribution = () => {
+const computeAttributionState = (persist) => {
   const snapshot = buildAttributionSnapshot();
-  const hasTrackedParams = Object.keys(snapshot.params).length > 0;
-  const hasExternalSource = hasTrackedParams || isExternalReferrer(snapshot.referrer);
-  const firstTouch = parseStoredValue(ATTRIBUTION_STORAGE_KEYS.firstTouch) || snapshot;
-  const lastTouch =
-    hasExternalSource || !parseStoredValue(ATTRIBUTION_STORAGE_KEYS.lastTouch)
-      ? snapshot
-      : parseStoredValue(ATTRIBUTION_STORAGE_KEYS.lastTouch);
 
-  safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.firstTouch, JSON.stringify(firstTouch));
-  safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.lastTouch, JSON.stringify(lastTouch));
+  if (!hasTrackingConsent()) {
+    return {
+      firstTouch: null,
+      lastTouch: null,
+      current: snapshot,
+    };
+  }
+
+  const storedFirstTouch = parseStoredValue(ATTRIBUTION_STORAGE_KEYS.firstTouch);
+  const storedLastTouch = parseStoredValue(ATTRIBUTION_STORAGE_KEYS.lastTouch);
+  const hasTrackedParams = Object.keys(snapshot.params).length > 0;
+  const shouldReplaceLastTouch = hasTrackedParams || isExternalReferrer(snapshot.referrer);
+  const firstTouch = storedFirstTouch || snapshot;
+  const lastTouch = shouldReplaceLastTouch || !storedLastTouch ? snapshot : storedLastTouch;
+
+  if (persist) {
+    safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.firstTouch, JSON.stringify(firstTouch));
+    safeWriteStorage(ATTRIBUTION_STORAGE_KEYS.lastTouch, JSON.stringify(lastTouch));
+  }
 
   return {
     firstTouch,
@@ -216,13 +229,20 @@ const persistAttribution = () => {
   };
 };
 
-const attributionState = persistAttribution();
+const refreshAttributionState = (persist = hasTrackingConsent()) => {
+  attributionState = computeAttributionState(persist);
+  return attributionState;
+};
 
-const mergedAttributionParams = () => ({
-  ...(attributionState.firstTouch?.params || {}),
-  ...(attributionState.lastTouch?.params || {}),
-  ...(attributionState.current?.params || {}),
-});
+const mergedAttributionParams = () => {
+  if (!hasTrackingConsent()) return {};
+
+  return {
+    ...(attributionState.firstTouch?.params || {}),
+    ...(attributionState.lastTouch?.params || {}),
+    ...(attributionState.current?.params || {}),
+  };
+};
 
 const serializeSnapshot = (snapshot) => {
   if (!snapshot) return "";
@@ -257,57 +277,134 @@ const buildAttributionProperties = (prefix, snapshot) => {
   return properties;
 };
 
-const syncPostHogAttribution = () => {
-  if (!posthog) return;
+const installPostHogStub = () => {
+  if (window.posthog?.init || window.posthog?.__SV) return;
 
-  posthog.register_once({
+  !(function (t, e) {
+    let o;
+    let p;
+    let r;
+    if (e.__SV) return;
+    window.posthog = e;
+    e._i = [];
+    e.init = function (projectKey, config, name) {
+      const stub = name !== undefined ? (e[name] = []) : e;
+      const attach = function (target, methodName) {
+        const parts = methodName.split(".");
+        if (parts.length === 2) {
+          target = target[parts[0]];
+          methodName = parts[1];
+        }
+        target[methodName] = function () {
+          target.push([methodName].concat(Array.prototype.slice.call(arguments, 0)));
+        };
+      };
+      p = t.createElement("script");
+      p.type = "text/javascript";
+      p.crossOrigin = "anonymous";
+      p.async = true;
+      p.src = `${config.api_host.replace(".i.posthog.com", "-assets.i.posthog.com")}/static/array.js`;
+      r = t.getElementsByTagName("script")[0];
+      r.parentNode.insertBefore(p, r);
+      if (name === undefined) name = "posthog";
+      stub.people = stub.people || [];
+      stub.toString = function (withStub) {
+        let label = "posthog";
+        if (name !== "posthog") label += `.${name}`;
+        if (!withStub) label += " (stub)";
+        return label;
+      };
+      stub.people.toString = function () {
+        return `${stub.toString(1)}.people (stub)`;
+      };
+      const methods =
+        "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(
+          " "
+        );
+      for (o = 0; o < methods.length; o += 1) {
+        attach(stub, methods[o]);
+      }
+      e._i.push([projectKey, config, name]);
+    };
+    e.__SV = 1;
+  })(document, window.posthog || []);
+};
+
+const initPostHog = () => {
+  if (!hasTrackingConsent() || !shouldLoadPostHog()) {
+    return null;
+  }
+
+  if (!posthogInitialized) {
+    installPostHogStub();
+    window.posthog.init(POSTHOG_PROJECT_KEY, {
+      api_host: POSTHOG_API_HOST,
+      defaults: "2026-01-30",
+      autocapture: false,
+      capture_dead_clicks: false,
+      disable_session_recording: true,
+      enable_heatmaps: false,
+      persistence: "localStorage+cookie",
+    });
+    posthog = window.posthog;
+    posthogInitialized = true;
+  } else {
+    posthog = window.posthog || posthog;
+    posthog?.clear_opt_in_out_capturing?.();
+    posthog?.opt_in_capturing?.();
+  }
+
+  return posthog;
+};
+
+const syncPostHogAttribution = () => {
+  if (!hasTrackingConsent()) return;
+
+  const activePosthog = initPostHog();
+  if (!activePosthog) return;
+
+  activePosthog.register_once({
     ...buildAttributionProperties("initial_touch", attributionState.firstTouch),
     initial_touch_page_name: currentPageName,
   });
 
-  posthog.register({
+  activePosthog.register({
     ...buildAttributionProperties("latest_touch", attributionState.lastTouch),
     latest_touch_page_name: currentPageName,
   });
 };
 
-const trackEvent = (eventName, detail = {}) => {
-  const properties = {
-    page_name: currentPageName,
-    page_path: currentPagePath,
-    page_title: document.title,
-    ...detail,
-  };
-  const payload = {
-    event: eventName,
-    ...properties,
-  };
-
-  dataLayer.push(payload);
-  window.dispatchEvent(new CustomEvent("sanctify:track", { detail: payload }));
-  if (posthog && eventName !== "page_view") {
-    posthog.capture(eventName, properties);
-  }
-
-  return payload;
+const clearAttributionFields = () => {
+  document.querySelectorAll("[data-attribution-field]").forEach((input) => {
+    input.value = "";
+  });
 };
 
 const enrichSignupLinks = () => {
-  const attributionParams = mergedAttributionParams();
+  const trackingEnabled = hasTrackingConsent();
+  const attributionParams = trackingEnabled ? mergedAttributionParams() : {};
 
   document.querySelectorAll("a[href]").forEach((link) => {
-    const href = link.getAttribute("href");
+    const href = link.dataset.baseHref || link.getAttribute("href");
     if (!href) return;
+    if (!link.dataset.baseHref) {
+      link.dataset.baseHref = href;
+    }
 
     let url;
 
     try {
-      url = new URL(href, window.location.href);
+      url = new URL(link.dataset.baseHref, window.location.href);
     } catch (error) {
       return;
     }
 
     if (url.hostname !== APP_SIGNUP_HOST || !url.pathname.startsWith("/signup")) {
+      return;
+    }
+
+    if (!trackingEnabled) {
+      link.href = url.toString();
       return;
     }
 
@@ -330,6 +427,11 @@ const enrichSignupLinks = () => {
 };
 
 const populateAttributionFields = () => {
+  if (!hasTrackingConsent()) {
+    clearAttributionFields();
+    return;
+  }
+
   const attributionParams = mergedAttributionParams();
 
   document.querySelectorAll("[data-attribution-field]").forEach((input) => {
@@ -355,16 +457,279 @@ const populateAttributionFields = () => {
   });
 };
 
-enrichSignupLinks();
-populateAttributionFields();
-syncPostHogAttribution();
-trackEvent("page_view", {
-  landing_page: attributionState.firstTouch?.page || currentPagePath,
-  last_touch_page: attributionState.lastTouch?.page || currentPagePath,
-});
+const trackEvent = (eventName, detail = {}) => {
+  const properties = {
+    page_name: currentPageName,
+    page_path: currentPagePath,
+    page_title: document.title,
+    ...detail,
+  };
+  const payload = {
+    event: eventName,
+    ...properties,
+  };
+
+  if (!hasTrackingConsent()) {
+    return payload;
+  }
+
+  dataLayer.push(payload);
+  window.dispatchEvent(new CustomEvent("sanctify:track", { detail: payload }));
+
+  const activePostHog = initPostHog();
+  if (activePostHog) {
+    activePostHog.capture(eventName, properties);
+  }
+
+  if (eventName === "page_view") {
+    pageViewTracked = true;
+  }
+
+  return payload;
+};
+
+const trackPageView = () => {
+  if (pageViewTracked || !hasTrackingConsent()) return;
+
+  refreshAttributionState(true);
+  syncPostHogAttribution();
+  trackEvent("page_view", {
+    landing_page: attributionState.firstTouch?.page || currentPagePath,
+    last_touch_page: attributionState.lastTouch?.page || currentPagePath,
+  });
+};
+
+const updateConsentUi = () => {
+  if (!consentBannerMounted) return;
+
+  const consentStatus = readTrackingConsent();
+  const shouldShowBanner = consentBannerOpen || consentStatus === "unknown";
+  consentBanner.hidden = !shouldShowBanner;
+  consentManageButton.hidden = false;
+
+  if (consentBannerStatus) {
+    if (consentStatus === "granted") {
+      consentBannerStatus.textContent = "Analytics is on. You can change that any time.";
+    } else if (consentStatus === "denied") {
+      consentBannerStatus.textContent = "Analytics is off. Sanctify still works normally.";
+    } else {
+      consentBannerStatus.textContent = "Choose whether Sanctify can use optional analytics on this device.";
+    }
+  }
+};
+
+const injectConsentStyles = () => {
+  if (document.getElementById("sanctify-consent-style")) return;
+
+  const style = document.createElement("style");
+  style.id = "sanctify-consent-style";
+  style.textContent = `
+    .sanctify-consent-manage {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 40;
+      border: 1px solid rgba(23, 32, 31, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #17201f;
+      padding: 10px 14px;
+      font: 600 0.92rem -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      box-shadow: 0 18px 48px rgba(23, 32, 31, 0.14);
+      backdrop-filter: blur(18px);
+      cursor: pointer;
+    }
+    .sanctify-consent-banner {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 41;
+      width: min(420px, calc(100vw - 36px));
+    }
+    .sanctify-consent-card {
+      border: 1px solid rgba(23, 32, 31, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 20px;
+      box-shadow: 0 24px 70px rgba(23, 32, 31, 0.18);
+      backdrop-filter: blur(22px);
+    }
+    .sanctify-consent-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #126c66;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .sanctify-consent-card h3 {
+      margin: 0;
+      color: #17201f;
+      font-size: 1.35rem;
+      line-height: 1.1;
+    }
+    .sanctify-consent-card p {
+      margin: 10px 0 0;
+      color: #47514f;
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+    .sanctify-consent-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .sanctify-consent-btn,
+    .sanctify-consent-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font: 650 0.94rem -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .sanctify-consent-btn {
+      border: 0;
+    }
+    .sanctify-consent-btn.primary {
+      background: #126c66;
+      color: #ffffff;
+    }
+    .sanctify-consent-btn.secondary,
+    .sanctify-consent-link {
+      border: 1px solid rgba(23, 32, 31, 0.12);
+      background: rgba(255, 255, 255, 0.88);
+      color: #17201f;
+    }
+    .sanctify-consent-status {
+      min-height: 22px;
+    }
+    @media (max-width: 640px) {
+      .sanctify-consent-manage {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+      }
+      .sanctify-consent-banner {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        bottom: 66px;
+      }
+      .sanctify-consent-actions {
+        flex-direction: column;
+      }
+      .sanctify-consent-btn,
+      .sanctify-consent-link {
+        width: 100%;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+};
+
+const openPrivacyChoices = () => {
+  consentBannerOpen = true;
+  updateConsentUi();
+};
+
+const setTrackingConsent = (status) => {
+  const normalized = status === "granted" ? "granted" : "denied";
+  writeTrackingConsent(normalized);
+  consentBannerOpen = false;
+
+  if (normalized === "denied") {
+    clearStoredAttribution();
+    clearAttributionFields();
+    pageViewTracked = false;
+    if (posthogInitialized && window.posthog) {
+      window.posthog.opt_out_capturing?.();
+      window.posthog.reset?.();
+    }
+  } else if (posthogInitialized && window.posthog) {
+    window.posthog.clear_opt_in_out_capturing?.();
+    window.posthog.opt_in_capturing?.();
+  }
+
+  applyConsentState({ trackPage: true });
+};
+
+const ensureConsentUi = () => {
+  if (consentBannerMounted || !document.body) return;
+
+  injectConsentStyles();
+
+  consentManageButton = document.createElement("button");
+  consentManageButton.type = "button";
+  consentManageButton.className = "sanctify-consent-manage";
+  consentManageButton.textContent = "Privacy choices";
+  consentManageButton.hidden = true;
+  consentManageButton.addEventListener("click", openPrivacyChoices);
+  document.body.appendChild(consentManageButton);
+
+  consentBanner = document.createElement("aside");
+  consentBanner.className = "sanctify-consent-banner";
+  consentBanner.hidden = true;
+  consentBanner.innerHTML = `
+    <div class="sanctify-consent-card" role="dialog" aria-live="polite" aria-label="Privacy choices">
+      <span class="sanctify-consent-eyebrow">Privacy choices</span>
+      <h3>Optional analytics</h3>
+      <p>
+        Sanctify uses optional analytics to understand which pages, plans, and signup paths are actually working.
+        Filtering, billing, and account access still work if you decline.
+      </p>
+      <div class="sanctify-consent-actions">
+        <button type="button" class="sanctify-consent-btn primary" data-consent-action="granted">Allow analytics</button>
+        <button type="button" class="sanctify-consent-btn secondary" data-consent-action="denied">Decline analytics</button>
+        <a class="sanctify-consent-link" href="/privacy-policy.html">Read privacy policy</a>
+      </div>
+      <p class="sanctify-consent-status" data-consent-status></p>
+    </div>
+  `;
+
+  consentBannerStatus = consentBanner.querySelector("[data-consent-status]");
+  consentBanner.querySelectorAll("[data-consent-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setTrackingConsent(button.dataset.consentAction);
+    });
+  });
+
+  document.body.appendChild(consentBanner);
+  consentBannerMounted = true;
+  updateConsentUi();
+};
+
+const applyConsentState = ({ trackPage = true } = {}) => {
+  if (hasTrackingConsent()) {
+    refreshAttributionState(true);
+    syncPostHogAttribution();
+    enrichSignupLinks();
+    populateAttributionFields();
+    if (trackPage) {
+      trackPageView();
+    }
+  } else {
+    refreshAttributionState(false);
+    enrichSignupLinks();
+    populateAttributionFields();
+  }
+
+  updateConsentUi();
+};
+
+refreshAttributionState(false);
+ensureConsentUi();
+applyConsentState({ trackPage: true });
 
 const setHeaderState = () => {
-  header.classList.toggle("is-scrolled", window.scrollY > 12);
+  header?.classList.toggle("is-scrolled", window.scrollY > 12);
 };
 
 if (header) {
@@ -478,7 +843,18 @@ if (trackedForm) {
   });
 }
 
+document.querySelectorAll("[data-open-privacy-choices]").forEach((element) => {
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    openPrivacyChoices();
+  });
+});
+
 window.sanctifyTracking = {
-  attribution: attributionState,
+  get attribution() {
+    return attributionState;
+  },
   trackEvent,
+  openPrivacyChoices,
+  getConsentStatus: readTrackingConsent,
 };

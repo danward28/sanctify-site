@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Sanctify Privacy Policy for account, device, DNS metadata, shepherd visibility, and data retention."
+      content="Sanctify Privacy Policy for account data, protection status, optional analytics, shepherd visibility, and data retention."
     />
     <title>Privacy Policy | Sanctify</title>
     <link rel="stylesheet" href="styles.css" />
@@ -43,55 +43,79 @@
 
         <div class="subpage-copy reveal">
           <h1>Privacy stays central.</h1>
-          <p>Last updated: February 21, 2026</p>
+          <p>Last updated: April 18, 2026</p>
         </div>
       </section>
 
       <article class="legal-content reveal">
         <p>
-          Sanctify (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the Sanctify DNS content
-          filtering service. This Privacy Policy explains how we collect, use, and protect your
-          information.
+          Sanctify (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) provides faith-based internet
+          protection for families and organizations. This Privacy Policy explains what we collect,
+          how we use it, and what choices you have.
         </p>
+
+        <div class="policy-choice-panel">
+          <strong>Privacy choices</strong>
+          <p>
+            Optional analytics stays off until you allow it. You can change that choice any time
+            with the button below.
+          </p>
+          <div class="policy-actions">
+            <button class="button secondary" type="button" data-open-privacy-choices>
+              Manage analytics choices
+            </button>
+            <a class="button primary" href="contact.html">Contact Sanctify</a>
+          </div>
+        </div>
 
         <h2>1. Information We Collect</h2>
-        <h3>Account Information</h3>
+        <h3>Account and Billing Information</h3>
         <p>
-          When you create an account, we collect your name, email address, and payment information
-          processed securely by Stripe. If you join through a congregation, we also record that
-          affiliation.
+          When you create an account, we collect your family name, email address, subscription
+          selections, and related billing records. Payment details are processed by Stripe and are
+          not stored on Sanctify servers.
         </p>
 
-        <h3>Device Information</h3>
+        <h3>Device and Protection Status</h3>
         <p>
           For each device you register, we collect the device name, platform, and a unique device
-          identifier. We also collect heartbeat data including app version, OS version, battery
-          level, and DNS profile status to ensure your protection is active.
+          identifier. We also collect health signals such as app version, OS version, battery
+          level, and protection status so we can tell whether filtering is active and working.
         </p>
 
-        <h3>DNS Query Metadata</h3>
+        <h3>Filter and Compliance Summaries</h3>
         <p>
-          Our filtering service processes DNS queries to block harmful content. We record
-          category-level metadata only, such as adult content was blocked, for compliance reporting.
-          We do not log specific URLs or domain names that you visit.
+          Sanctify records category-level filter events, such as adult content, gambling, or
+          profile tampering, so family administrators and approved shepherds can understand whether
+          protection is working. We do not promise “zero metadata,” but we do avoid building a
+          browsing-history product. Specific browsing history is not shown to shepherds.
         </p>
 
-        <h3>IP Address and Location Data</h3>
+        <h3>Network and Abuse Signals</h3>
         <p>
-          We collect IP addresses from device heartbeats to detect geographic anomalies that may
-          indicate account sharing. We do not perform precise geolocation. IP data is used only for
-          abuse detection.
+          We collect IP addresses and related network signals to detect suspicious activity, account
+          sharing, and service abuse. We do not use these signals for precise consumer location
+          tracking.
+        </p>
+
+        <h3>Optional Analytics and Attribution</h3>
+        <p>
+          If you allow optional analytics, we store a consent choice in your browser and collect
+          limited site and app usage data, such as the page that led to signup, selected plan
+          intent, and whether checkout or the billing portal was opened. This helps us understand
+          which pages and offers actually convert. If you decline, the service still works and we
+          do not load that analytics layer on your device.
         </p>
 
         <h2>2. How We Use Information</h2>
         <ul>
-          <li>To provide and maintain the DNS filtering service</li>
-          <li>To detect when device protection has been disabled or bypassed</li>
-          <li>To send compliance alerts to family administrators and shepherds</li>
+          <li>To provide and maintain Sanctify protection and device setup</li>
+          <li>To detect when protection has been disabled, bypassed, or degraded</li>
+          <li>To send accountability or compliance alerts to family administrators and shepherds</li>
           <li>To process payments and manage subscriptions</li>
           <li>To enforce household and device limits</li>
           <li>To detect and prevent account sharing or abuse</li>
-          <li>To improve our service and develop new features</li>
+          <li>To improve the service and develop features such as Smart Filter AI</li>
         </ul>
 
         <h2>3. What Shepherds Can See</h2>
@@ -103,14 +127,27 @@
           <li>Your family name and number of devices</li>
           <li>Device protection status, such as protected, degraded, or unprotected</li>
           <li>Blocked content categories only, such as adult content or gambling</li>
-          <li>Compliance events, such as a DNS profile being removed</li>
+          <li>Compliance events, such as protection being removed or weakened</li>
         </ul>
         <p>
           Shepherds can never see specific URLs, domain names, or browsing history. They see only
           aggregate category-level information to support your family's accountability goals.
         </p>
 
-        <h2>4. Data Retention</h2>
+        <h2>4. Cookies, Browser Storage, and Privacy Choices</h2>
+        <p>
+          Sanctify uses a small browser record to remember your analytics choice across
+          <code>sanctify.faith</code> and <code>app.sanctify.faith</code>. If you allow analytics,
+          we also store limited first-touch and last-touch attribution data so we can connect signup
+          and billing activity back to the page or campaign that led to it.
+        </p>
+        <p>
+          You can withdraw or re-enable that optional analytics choice any time using the
+          <strong>Privacy choices</strong> control on the site or app. Declining analytics does not
+          block account access, filtering, or billing.
+        </p>
+
+        <h2>5. Data Retention</h2>
         <p>
           We retain account data for the duration of your subscription plus 30 days. Heartbeat data
           is retained for 90 days. Compliance events are retained for 1 year. DNS query metadata,
@@ -118,7 +155,7 @@
           data is removed within 30 days.
         </p>
 
-        <h2>5. Device and Household Limits</h2>
+        <h2>6. Device and Household Limits</h2>
         <p>
           Each Sanctify account supports up to 15 devices per household. One subscription is
           intended for use by one household at one physical address. We monitor device
@@ -127,7 +164,7 @@
           contact you or suspend the account.
         </p>
 
-        <h2>6. Children's Privacy</h2>
+        <h2>7. Children's Privacy</h2>
         <p>
           Sanctify is designed to be used by families, including families with children. Account
           registration requires a parent or guardian. We do not knowingly collect personal
@@ -135,28 +172,46 @@
           managed through the family administrator's account.
         </p>
 
-        <h2>7. Security</h2>
+        <h2>8. Service Providers</h2>
         <p>
-          We use industry-standard security measures to protect your data, including encrypted
-          connections, secure server infrastructure, and access controls. Payment information is
-          processed by Stripe and never stored on our servers.
+          We rely on service providers for parts of the platform, including:
         </p>
-
-        <h2>8. Third-Party Services</h2>
-        <p>We use the following third-party services:</p>
         <ul>
-          <li>AdGuard Home for DNS filtering infrastructure</li>
+          <li>Clerk for authentication and identity services</li>
           <li>Stripe for payment processing</li>
+          <li>PostHog for optional product analytics and attribution</li>
+          <li>AdGuard Home for filtering infrastructure</li>
+          <li>OpenAI for Smart Filter AI features when that add-on is enabled</li>
         </ul>
-        <p>Each operates under its own privacy policy.</p>
+        <p>Each provider operates under its own terms and privacy commitments.</p>
 
-        <h2>9. Changes to This Policy</h2>
+        <h2>9. Security</h2>
         <p>
-          We may update this Privacy Policy from time to time. We will notify you of significant
-          changes by email or through the app.
+          We use encrypted connections, access controls, authentication safeguards, and operational
+          monitoring to protect the platform. No system is perfect, but we design Sanctify to limit
+          exposure and avoid storing more sensitive browsing detail than we need.
         </p>
 
-        <h2>10. Contact Us</h2>
+        <h2>10. Privacy Rights and Regional Notices</h2>
+        <p>
+          Sanctify is primarily marketed in the United States, but some visitors may access the site
+          from the EEA, UK, Switzerland, or similar jurisdictions. If those laws apply to you, you
+          may have rights to request access, correction, deletion, portability, or objection in
+          relation to your personal data, subject to applicable law.
+        </p>
+        <p>
+          Optional analytics stays off until you allow it. For privacy requests, contact us and we
+          will route the request through the appropriate operational and legal process.
+        </p>
+
+        <h2>11. Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. If we make a material change, we
+          will update this page and, when appropriate, notify active customers by email or through
+          the app.
+        </p>
+
+        <h2>12. Contact Us</h2>
         <p>
           If you have questions about this Privacy Policy, contact us at
           <a href="mailto:info@sanctify.faith">info@sanctify.faith</a>.

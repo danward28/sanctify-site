@@ -438,15 +438,8 @@ const initKlaviyo = () => {
   }
 
   if (!klaviyoInitialized) {
-    installKlaviyoStub();
-
-    if (!document.getElementById("sanctify-klaviyo-js")) {
-      const script = document.createElement("script");
-      script.id = "sanctify-klaviyo-js";
-      script.async = true;
-      script.type = "text/javascript";
-      script.src = KLAVIYO_SCRIPT_URL;
-      document.head.appendChild(script);
+    if (!window.klaviyo) {
+      installKlaviyoStub();
     }
 
     klaviyo = window.klaviyo;

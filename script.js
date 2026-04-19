@@ -508,13 +508,13 @@ const updateConsentUi = () => {
   consentManageButton.hidden = false;
 
   if (consentBannerStatus) {
-    if (consentStatus === "granted") {
-      consentBannerStatus.textContent = "Analytics is on. You can change that any time.";
-    } else if (consentStatus === "denied") {
-      consentBannerStatus.textContent = "Analytics is off. Sanctify still works normally.";
-    } else {
-      consentBannerStatus.textContent = "Choose whether Sanctify can use optional analytics on this device.";
-    }
+      if (consentStatus === "granted") {
+        consentBannerStatus.textContent = "Optional analytics cookies are on. You can change that any time.";
+      } else if (consentStatus === "denied") {
+        consentBannerStatus.textContent = "Optional analytics cookies are off. Necessary site storage still stays on.";
+      } else {
+        consentBannerStatus.textContent = "Choose whether Sanctify can use optional analytics cookies on this device.";
+      }
   }
 };
 
@@ -669,7 +669,7 @@ const ensureConsentUi = () => {
   consentManageButton = document.createElement("button");
   consentManageButton.type = "button";
   consentManageButton.className = "sanctify-consent-manage";
-  consentManageButton.textContent = "Privacy choices";
+  consentManageButton.textContent = "Cookie settings";
   consentManageButton.hidden = true;
   consentManageButton.addEventListener("click", openPrivacyChoices);
   document.body.appendChild(consentManageButton);
@@ -678,16 +678,16 @@ const ensureConsentUi = () => {
   consentBanner.className = "sanctify-consent-banner";
   consentBanner.hidden = true;
   consentBanner.innerHTML = `
-    <div class="sanctify-consent-card" role="dialog" aria-live="polite" aria-label="Privacy choices">
-      <span class="sanctify-consent-eyebrow">Privacy choices</span>
-      <h3>Optional analytics</h3>
+    <div class="sanctify-consent-card" role="dialog" aria-live="polite" aria-label="Cookie and privacy settings">
+      <span class="sanctify-consent-eyebrow">Cookies and privacy</span>
+      <h3>Choose your cookie settings</h3>
       <p>
-        Sanctify uses optional analytics to understand which pages, plans, and signup paths are actually working.
-        Filtering, billing, and account access still work if you decline.
+        Sanctify uses necessary storage to keep the site working. With your permission, we also use optional analytics cookies to understand which pages, plans, and signup paths are working.
       </p>
+      <p>Filtering, billing, and account access still work if you decline optional analytics cookies.</p>
       <div class="sanctify-consent-actions">
-        <button type="button" class="sanctify-consent-btn primary" data-consent-action="granted">Allow analytics</button>
-        <button type="button" class="sanctify-consent-btn secondary" data-consent-action="denied">Decline analytics</button>
+        <button type="button" class="sanctify-consent-btn primary" data-consent-action="granted">Accept analytics cookies</button>
+        <button type="button" class="sanctify-consent-btn secondary" data-consent-action="denied">Reject optional cookies</button>
         <a class="sanctify-consent-link" href="/privacy-policy.html">Read privacy policy</a>
       </div>
       <p class="sanctify-consent-status" data-consent-status></p>

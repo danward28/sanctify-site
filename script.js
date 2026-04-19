@@ -20,6 +20,8 @@ const CONSENT_STORAGE_KEYS = {
 const APP_SIGNUP_HOST = "app.sanctify.faith";
 const POSTHOG_PROJECT_KEY = "phc_wrdQPfbQNZBPemwgKJmripmKxvKRAMRXYkNNsyvC3jNk";
 const POSTHOG_API_HOST = "https://us.i.posthog.com";
+const KLAVIYO_COMPANY_ID = "TWQUrK";
+const KLAVIYO_SCRIPT_URL = `https://static.klaviyo.com/onsite/js/${KLAVIYO_COMPANY_ID}/klaviyo.js?company_id=${KLAVIYO_COMPANY_ID}`;
 const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector(".menu-toggle");
 const heroStage = document.querySelector("[data-tilt] .hero-stage");
@@ -30,6 +32,8 @@ const currentPageName = currentPage === "index.html" ? "home" : currentPage.repl
 const dataLayer = (window.dataLayer = window.dataLayer || []);
 let posthog = null;
 let posthogInitialized = false;
+let klaviyo = null;
+let klaviyoInitialized = false;
 let pageViewTracked = false;
 let consentBannerMounted = false;
 let consentBannerOpen = false;
@@ -111,6 +115,8 @@ const shouldLoadPostHog = () => {
   return hostname !== "localhost" && !hostname.startsWith("127.") && !hostname.endsWith(".local");
 };
 
+const shouldLoadKlaviyo = () => shouldLoadPostHog();
+
 const parseStoredValue = (key) => {
   const value = safeReadStorage(key);
   if (!value) return null;
@@ -141,6 +147,20 @@ const writeConsentCookie = (value) => {
 
   if (canUseSharedConsentCookie()) {
     parts.push("Domain=.sanctify.faith");
+  }
+
+  if (window.location.protocol === "https:") {
+    parts.push("Secure");
+  }
+
+  document.cookie = parts.join("; ");
+};
+
+const expireCookie = (name, domain) => {
+  const parts = [`${name}=`, "Path=/", "Max-Age=0", "SameSite=Lax"];
+
+  if (domain) {
+    parts.push(`Domain=${domain}`);
   }
 
   if (window.location.protocol === "https:") {
@@ -277,6 +297,19 @@ const buildAttributionProperties = (prefix, snapshot) => {
   return properties;
 };
 
+const splitFullName = (fullName) => {
+  const normalized = String(fullName || "").trim();
+  if (!normalized) {
+    return { firstName: "", lastName: "" };
+  }
+
+  const parts = normalized.split(/\s+/);
+  return {
+    firstName: parts[0] || "",
+    lastName: parts.slice(1).join(" "),
+  };
+};
+
 const installPostHogStub = () => {
   if (window.posthog?.init || window.posthog?.__SV) return;
 
@@ -330,6 +363,48 @@ const installPostHogStub = () => {
   })(document, window.posthog || []);
 };
 
+const installKlaviyoStub = () => {
+  if (window.klaviyo?.identify || window.klaviyo?.track) return;
+
+  window._klOnsite = window._klOnsite || [];
+
+  try {
+    window.klaviyo = new Proxy(
+      {},
+      {
+        get(_target, methodName) {
+          if (methodName === "push") {
+            return function () {
+              window._klOnsite.push.apply(window._klOnsite, arguments);
+            };
+          }
+
+          return function () {
+            const args = Array.from(arguments);
+            const callback = typeof args[args.length - 1] === "function" ? args.pop() : undefined;
+
+            return new Promise((resolve) => {
+              window._klOnsite.push([
+                methodName,
+                ...args,
+                function (result) {
+                  callback?.(result);
+                  resolve(result);
+                },
+              ]);
+            });
+          };
+        },
+      }
+    );
+  } catch (error) {
+    window.klaviyo = window.klaviyo || [];
+    window.klaviyo.push = function () {
+      window._klOnsite.push.apply(window._klOnsite, arguments);
+    };
+  }
+};
+
 const initPostHog = () => {
   if (!hasTrackingConsent() || !shouldLoadPostHog()) {
     return null;
@@ -357,6 +432,32 @@ const initPostHog = () => {
   return posthog;
 };
 
+const initKlaviyo = () => {
+  if (!hasTrackingConsent() || !shouldLoadKlaviyo()) {
+    return null;
+  }
+
+  if (!klaviyoInitialized) {
+    installKlaviyoStub();
+
+    if (!document.getElementById("sanctify-klaviyo-js")) {
+      const script = document.createElement("script");
+      script.id = "sanctify-klaviyo-js";
+      script.async = true;
+      script.type = "text/javascript";
+      script.src = KLAVIYO_SCRIPT_URL;
+      document.head.appendChild(script);
+    }
+
+    klaviyo = window.klaviyo;
+    klaviyoInitialized = true;
+  } else {
+    klaviyo = window.klaviyo || klaviyo;
+  }
+
+  return klaviyo;
+};
+
 const syncPostHogAttribution = () => {
   if (!hasTrackingConsent()) return;
 
@@ -372,6 +473,39 @@ const syncPostHogAttribution = () => {
     ...buildAttributionProperties("latest_touch", attributionState.lastTouch),
     latest_touch_page_name: currentPageName,
   });
+};
+
+const clearKlaviyoCookies = () => {
+  expireCookie("__kla_id");
+
+  if (canUseSharedConsentCookie()) {
+    expireCookie("__kla_id", ".sanctify.faith");
+  }
+};
+
+const identifyKlaviyoProfile = ({ email, fullName = "", interestTag = "", sourcePage = currentPageName } = {}) => {
+  if (!email) return;
+
+  const activeKlaviyo = initKlaviyo();
+  if (!activeKlaviyo) return;
+
+  const { firstName, lastName } = splitFullName(fullName);
+
+  activeKlaviyo.identify({
+    email,
+    first_name: firstName,
+    last_name: lastName,
+    full_name: fullName,
+    interest_tag: interestTag,
+    source_page: sourcePage,
+  });
+};
+
+const trackKlaviyoEvent = (eventName, properties = {}) => {
+  const activeKlaviyo = initKlaviyo();
+  if (!activeKlaviyo) return;
+
+  activeKlaviyo.track(eventName, properties);
 };
 
 const clearAttributionFields = () => {
@@ -509,11 +643,11 @@ const updateConsentUi = () => {
 
   if (consentBannerStatus) {
       if (consentStatus === "granted") {
-        consentBannerStatus.textContent = "Optional analytics cookies are on. You can change that any time.";
+        consentBannerStatus.textContent = "Optional analytics and marketing cookies are on. You can change that any time.";
       } else if (consentStatus === "denied") {
-        consentBannerStatus.textContent = "Optional analytics cookies are off. Necessary site storage still stays on.";
+        consentBannerStatus.textContent = "Optional analytics and marketing cookies are off. Necessary site storage still stays on.";
       } else {
-        consentBannerStatus.textContent = "Choose whether Sanctify can use optional analytics cookies on this device.";
+        consentBannerStatus.textContent = "Choose whether Sanctify can use optional analytics and marketing cookies on this device.";
       }
   }
 };
@@ -648,6 +782,7 @@ const setTrackingConsent = (status) => {
   if (normalized === "denied") {
     clearStoredAttribution();
     clearAttributionFields();
+    clearKlaviyoCookies();
     pageViewTracked = false;
     if (posthogInitialized && window.posthog) {
       window.posthog.opt_out_capturing?.();
@@ -682,11 +817,11 @@ const ensureConsentUi = () => {
       <span class="sanctify-consent-eyebrow">Cookies and privacy</span>
       <h3>Choose your cookie settings</h3>
       <p>
-        Sanctify uses necessary storage to keep the site working. With your permission, we also use optional analytics cookies to understand which pages, plans, and signup paths are working.
+        Sanctify uses necessary storage to keep the site working. With your permission, we also use optional analytics and marketing cookies to understand which pages, plans, signup paths, and follow-up forms are working.
       </p>
-      <p>Filtering, billing, and account access still work if you decline optional analytics cookies.</p>
+      <p>Filtering, billing, and account access still work if you decline optional analytics and marketing cookies.</p>
       <div class="sanctify-consent-actions">
-        <button type="button" class="sanctify-consent-btn primary" data-consent-action="granted">Accept analytics cookies</button>
+        <button type="button" class="sanctify-consent-btn primary" data-consent-action="granted">Accept optional cookies</button>
         <button type="button" class="sanctify-consent-btn secondary" data-consent-action="denied">Reject optional cookies</button>
         <a class="sanctify-consent-link" href="/privacy-policy.html">Read privacy policy</a>
       </div>
@@ -710,6 +845,7 @@ const applyConsentState = ({ trackPage = true } = {}) => {
   if (hasTrackingConsent()) {
     refreshAttributionState(true);
     syncPostHogAttribution();
+    initKlaviyo();
     enrichSignupLinks();
     populateAttributionFields();
     if (trackPage) {
@@ -908,6 +1044,20 @@ document.querySelectorAll("form[data-lead-form]").forEach((leadForm) => {
       });
 
       if (!data.alreadyCustomer) {
+        identifyKlaviyoProfile({
+          email,
+          fullName: name,
+          interestTag,
+          sourcePage: leadForm.dataset.surface || currentPageName,
+        });
+        trackKlaviyoEvent("Lead Capture Completed", {
+          surface: leadForm.dataset.surface || currentPageName,
+          interest_tag: interestTag,
+          source_page: currentPageName,
+        });
+      }
+
+      if (!data.alreadyCustomer) {
         leadForm.reset();
       }
     } catch (error) {
@@ -979,6 +1129,21 @@ document.querySelectorAll("form[data-contact-form]").forEach((contactForm) => {
         marketing_consent: marketingConsent,
         created_lead: Boolean(data.leadId),
       });
+
+      if (marketingConsent) {
+        identifyKlaviyoProfile({
+          email,
+          fullName: name,
+          interestTag: topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+          sourcePage: contactForm.dataset.surface || currentPageName,
+        });
+        trackKlaviyoEvent("Contact Request Submitted", {
+          surface: contactForm.dataset.surface || currentPageName,
+          topic,
+          source_page: currentPageName,
+        });
+      }
+
       contactForm.reset();
     } catch (error) {
       setContactStatus("Could not send your message right now.", "error");

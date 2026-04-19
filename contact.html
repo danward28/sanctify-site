@@ -142,11 +142,11 @@
 
           <form
             class="mock-form reveal"
-            action="mailto:info@sanctify.faith"
+            action="#"
             method="post"
-            enctype="text/plain"
             data-track-submit="contact_submit"
             data-surface="contact_form"
+            data-contact-form
           >
             <div class="field-grid">
               <label>
@@ -185,6 +185,11 @@
               ></textarea>
             </label>
 
+            <label class="lead-consent">
+              <input name="marketingConsent" type="checkbox" />
+              <span>Keep me updated with Sanctify emails and follow-up resources.</span>
+            </label>
+
             <input type="hidden" name="utm_source" data-attribution-field="utm_source" />
             <input type="hidden" name="utm_medium" data-attribution-field="utm_medium" />
             <input type="hidden" name="utm_campaign" data-attribution-field="utm_campaign" />
@@ -199,6 +204,7 @@
             <input type="hidden" name="last_touch" data-attribution-field="last_touch" />
 
             <button class="button primary" type="submit">Get in touch</button>
+            <p class="lead-capture-status contact-form-status" data-contact-status aria-live="polite"></p>
             <p class="plan-note">
               Submitted details are used to respond to your request. See the Privacy Policy for
               details.

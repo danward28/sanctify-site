@@ -2918,6 +2918,10 @@ p {
   color: #b42318;
 }
 
+.contact-form-status {
+  min-height: 1.4rem;
+}
+
 @media (max-width: 900px) {
   .lead-capture-card {
     grid-template-columns: 1fr;

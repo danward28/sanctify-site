@@ -916,6 +916,76 @@ document.querySelectorAll("form[data-lead-form]").forEach((leadForm) => {
   });
 });
 
+document.querySelectorAll("form[data-contact-form]").forEach((contactForm) => {
+  const statusEl = contactForm.querySelector("[data-contact-status]");
+
+  const setContactStatus = (message, state = "") => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove("success", "error");
+    if (state) statusEl.classList.add(state);
+  };
+
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const topic = String(formData.get("topic") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const marketingConsent = formData.get("marketingConsent") === "on";
+
+    if (!name || !email || !topic || !message) {
+      setContactStatus("Please complete the required fields.", "error");
+      return;
+    }
+
+    setContactStatus("Sending your message...");
+
+    try {
+      const response = await fetch("https://app.sanctify.faith/marketing/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          topic,
+          message,
+          sourcePage: currentPageName,
+          interestTag: topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+          marketingConsent,
+          attribution: {
+            firstTouch: attributionState.firstTouch,
+            lastTouch: attributionState.lastTouch,
+          },
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) {
+        setContactStatus(data.error || "Could not send your message right now.", "error");
+        return;
+      }
+
+      setContactStatus("Message sent. Sanctify will follow up shortly.", "success");
+      trackEvent("contact_submit_completed", {
+        surface: contactForm.dataset.surface || currentPageName,
+        topic,
+        marketing_consent: marketingConsent,
+        created_lead: Boolean(data.leadId),
+      });
+      contactForm.reset();
+    } catch (error) {
+      setContactStatus("Could not send your message right now.", "error");
+    }
+  });
+});
+
 document.querySelectorAll("[data-open-privacy-choices]").forEach((element) => {
   element.addEventListener("click", (event) => {
     event.preventDefault();

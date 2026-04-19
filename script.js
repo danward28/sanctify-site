@@ -830,18 +830,91 @@ document.querySelectorAll("[data-track]").forEach((element) => {
   });
 });
 
-const trackedForm = document.querySelector("form[data-track-submit]");
-
-if (trackedForm) {
+document.querySelectorAll("form[data-track-submit]").forEach((trackedForm) => {
   trackedForm.addEventListener("submit", () => {
     const topicField = trackedForm.querySelector('[name="topic"]');
+    const interestField = trackedForm.querySelector('[name="interestTag"]');
 
     trackEvent(trackedForm.dataset.trackSubmit, {
       surface: trackedForm.dataset.surface || currentPageName,
       topic: topicField?.value || "",
+      interest_tag: interestField?.value || "",
     });
   });
-}
+});
+
+document.querySelectorAll("form[data-lead-form]").forEach((leadForm) => {
+  const statusEl = leadForm.querySelector("[data-lead-status]");
+
+  const setLeadStatus = (message, state = "") => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove("success", "error");
+    if (state) statusEl.classList.add(state);
+  };
+
+  leadForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(leadForm);
+    const email = String(formData.get("email") || "").trim();
+    const name = String(formData.get("name") || "").trim();
+    const interestTag = String(formData.get("interestTag") || "family").trim();
+    const marketingConsent = formData.get("marketingConsent") === "on";
+
+    if (!email || !marketingConsent) {
+      setLeadStatus("Consent and a valid email are required.", "error");
+      return;
+    }
+
+    setLeadStatus("Saving your spot...");
+
+    try {
+      const response = await fetch("https://app.sanctify.faith/marketing/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          interestTag,
+          sourcePage: currentPageName,
+          marketingConsent: true,
+          attribution: {
+            firstTouch: attributionState.firstTouch,
+            lastTouch: attributionState.lastTouch,
+          },
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) {
+        setLeadStatus(data.error || "Could not save your details right now.", "error");
+        return;
+      }
+
+      setLeadStatus(
+        data.alreadyCustomer
+          ? "That email already has a Sanctify account."
+          : "You are on the list. Sanctify will follow up with the right next step.",
+        "success"
+      );
+
+      trackEvent("lead_capture_completed", {
+        surface: leadForm.dataset.surface || currentPageName,
+        interest_tag: interestTag,
+        already_customer: Boolean(data.alreadyCustomer),
+      });
+
+      if (!data.alreadyCustomer) {
+        leadForm.reset();
+      }
+    } catch (error) {
+      setLeadStatus("Could not save your details right now.", "error");
+    }
+  });
+});
 
 document.querySelectorAll("[data-open-privacy-choices]").forEach((element) => {
   element.addEventListener("click", (event) => {

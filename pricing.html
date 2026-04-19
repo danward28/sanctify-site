@@ -417,6 +417,55 @@
           >Get started free</a>
         </div>
       </section>
+
+      <section class="page-section">
+        <div class="lead-capture-card reveal">
+          <div class="lead-capture-copy">
+            <span class="section-tag">Pricing follow-up</span>
+            <h2>Need time before you decide?</h2>
+            <p>
+              Leave your email and Sanctify can follow up with the right pricing, AI add-on, or
+              rollout details without making you start over later.
+            </p>
+          </div>
+          <form
+            class="lead-capture-form"
+            data-lead-form
+            data-track-submit="lead_capture_submit"
+            data-surface="pricing_lead_capture"
+          >
+            <div class="lead-capture-grid">
+              <label>
+                First name
+                <input name="name" autocomplete="given-name" />
+              </label>
+              <label>
+                Email address
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+            </div>
+            <label>
+              What do you want more of?
+              <select name="interestTag">
+                <option value="family">Family protection details</option>
+                <option value="smart-filter-ai">Smart Filter AI details</option>
+                <option value="shepherd">Shepherd partnership details</option>
+                <option value="organization">Organization rollout details</option>
+              </select>
+            </label>
+            <label class="lead-consent">
+              <input name="marketingConsent" type="checkbox" required />
+              Email me Sanctify updates and offers. I can unsubscribe at any time.
+            </label>
+            <div class="lead-capture-actions">
+              <button class="button primary" type="submit">Send me the details</button>
+              <p class="lead-capture-status" data-lead-status>
+                Updates are only sent if you opt in.
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">

@@ -739,9 +739,10 @@ const injectConsentStyles = () => {
     @media (max-width: 640px) {
       .sanctify-consent-manage {
         left: 12px;
-        right: 12px;
+        right: auto;
         bottom: 12px;
-        width: calc(100vw - 24px);
+        width: auto;
+        max-width: calc(100vw - 24px);
       }
       .sanctify-consent-banner {
         left: 12px;

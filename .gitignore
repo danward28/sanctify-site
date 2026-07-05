@@ -20,3 +20,7 @@ uap-research-vault/
 
 # Generated Python bytecode under utility scripts
 scripts/__pycache__/
+
+# Local one-off scripts unrelated to the Sanctify site
+scripts/build_mccormick_energy_architecture.py
+scripts/build_parsec_traksys_rfp.py

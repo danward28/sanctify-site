@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MXDZCTJW');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,follow" />
     <title>Sanctify Block Page Demo</title>
     <style>
       :root {
         color-scheme: light;
-        --ink: #18201f;
-        --ink-soft: #4b5653;
-        --line: rgba(24, 32, 31, 0.1);
-        --brand: #126c66;
-        --brand-dark: #0c534f;
-        --brand-soft: #dff1ec;
-        --paper: #fbfcfb;
-        --white: #ffffff;
+        --ink: #26302e;
+        --ink-soft: #49615d;
+        --muted: #6f827e;
+        --brand: #278f84;
+        --brand-dark: #237b73;
       }
 
       * {
@@ -27,178 +32,264 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 22px;
-        background:
-          radial-gradient(circle at 20% 10%, rgba(223, 241, 236, 0.9), rgba(223, 241, 236, 0) 32%),
-          radial-gradient(circle at 85% 18%, rgba(228, 108, 98, 0.08), rgba(228, 108, 98, 0) 24%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(251, 252, 251, 1));
+        padding: 24px 16px;
+        overflow-x: hidden;
+        background: linear-gradient(150deg, #cbece7 0%, #92cfc6 48%, #359187 100%);
         color: var(--ink);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      .demo-home-link {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.58);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 14px 34px rgba(17, 82, 76, 0.12);
+        color: var(--brand-dark);
+        padding: 10px 16px;
+        font-size: 0.92rem;
+        font-weight: 800;
+        text-decoration: none;
+        backdrop-filter: blur(16px) saturate(150%);
+      }
+
+      .demo-home-link:focus-visible {
+        outline: 3px solid rgba(255, 255, 255, 0.86);
+        outline-offset: 3px;
       }
 
       .screen {
-        position: relative;
-        width: min(100%, 430px);
+        width: calc(100vw - 40px);
+        max-width: 460px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
-      .watermark {
-        position: absolute;
-        top: -14px;
-        left: 50%;
-        width: min(240px, 72%);
-        transform: translateX(-50%);
-        opacity: 0.08;
-        pointer-events: none;
+      .brand-logo {
+        display: block;
+        width: 156px;
+        height: auto;
+      }
+
+      .screen-logo {
+        margin: 0 auto 22px;
       }
 
       .card {
-        position: relative;
-        z-index: 1;
-        padding: 34px 24px 22px;
-        border: 1px solid rgba(255, 255, 255, 0.76);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.82);
-        box-shadow: 0 28px 64px rgba(24, 32, 31, 0.12);
-        backdrop-filter: blur(24px) saturate(160%);
-      }
-
-      .brand {
-        width: 148px;
-        margin: 0 auto 14px;
+        width: 100%;
+        max-width: 330px;
+        padding: 34px 28px 26px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.58);
+        box-shadow: 0 28px 80px rgba(17, 82, 76, 0.18);
+        text-align: center;
+        backdrop-filter: blur(18px) saturate(150%);
       }
 
       .seal {
-        width: 72px;
-        height: 72px;
+        width: 76px;
+        height: 76px;
         margin: 0 auto 18px;
         display: grid;
         place-items: center;
         border-radius: 50%;
-        background: linear-gradient(145deg, var(--brand), var(--brand-dark));
-        box-shadow: 0 18px 36px rgba(18, 108, 102, 0.24);
+        background: var(--brand);
+        box-shadow: 0 18px 42px rgba(27, 116, 107, 0.22);
+        color: #ffffff;
       }
 
       .seal svg {
-        width: 34px;
-        height: 34px;
-        stroke: var(--white);
+        width: 38px;
+        height: 38px;
       }
 
       h1 {
-        margin: 0;
-        text-align: center;
-        font-size: 1.7rem;
-        line-height: 1.08;
+        margin: 0 0 10px;
+        color: var(--brand-dark);
+        font-size: 1.82rem;
+        font-weight: 850;
+        line-height: 1.12;
       }
 
       .lede {
-        margin: 12px auto 0;
-        max-width: 340px;
+        max-width: 300px;
+        margin: 0 auto 22px;
         color: var(--ink-soft);
-        text-align: center;
         font-size: 0.98rem;
         line-height: 1.55;
       }
 
       .verse {
-        margin-top: 22px;
-        padding: 18px 18px 16px;
-        border: 1px solid rgba(18, 108, 102, 0.1);
-        border-left: 3px solid var(--brand);
-        border-radius: 14px;
-        background: linear-gradient(180deg, rgba(223, 241, 236, 0.5), rgba(255, 255, 255, 0.94));
+        margin: 0 0 16px;
+        padding: 20px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.56);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 14px 34px rgba(28, 96, 87, 0.08);
       }
 
       .verse-text {
-        margin: 0;
-        color: var(--ink);
-        font-size: 0.98rem;
-        font-style: italic;
-        line-height: 1.62;
+        margin: 0 0 10px;
+        color: #1f2d2b;
+        font-size: 1.14rem;
+        line-height: 1.42;
+        overflow-wrap: break-word;
       }
 
       .verse-ref {
-        margin-top: 8px;
-        color: var(--brand-dark);
-        font-size: 0.84rem;
-        font-weight: 680;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 650;
       }
 
       .actions {
         display: grid;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 8px;
       }
 
       .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         min-height: 48px;
         border: 0;
         border-radius: 8px;
         padding: 12px 16px;
         font: inherit;
-        font-size: 0.97rem;
-        font-weight: 670;
+        font-size: 1rem;
+        font-weight: 800;
+        text-decoration: none;
+        white-space: normal;
       }
 
       .btn.secondary {
-        border: 1px solid rgba(18, 108, 102, 0.16);
-        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.58);
+        background: rgba(255, 255, 255, 0.78);
         color: var(--brand-dark);
       }
 
       .btn.primary {
-        background: linear-gradient(145deg, var(--brand), var(--brand-dark));
-        color: var(--white);
-        box-shadow: 0 18px 34px rgba(18, 108, 102, 0.18);
+        background: var(--brand);
+        color: #ffffff;
+        box-shadow: 0 12px 26px rgba(39, 143, 132, 0.22);
       }
 
       .btn.ghost {
         background: transparent;
-        color: #66706d;
+        color: #4f5e5a;
       }
 
       .privacy {
-        margin-top: 14px;
-        color: #68726f;
-        text-align: center;
-        font-size: 0.85rem;
-        line-height: 1.5;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .bottom-brand {
+        margin-top: 22px;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 0.78rem;
+        font-weight: 750;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 492px) {
+        .screen {
+          width: calc(100vw - 32px);
+        }
+      }
+
+      @media (max-width: 420px) {
+        body {
+          padding: 72px 12px 14px;
+        }
+
+        .demo-home-link {
+          top: 14px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: calc(100vw - 32px);
+        }
+
+        .screen {
+          width: calc(100vw - 24px);
+        }
+
+        .screen-logo {
+          margin-bottom: 18px;
+        }
+
+        .card {
+          padding: 30px 22px 22px;
+        }
+
+        h1 {
+          font-size: 1.52rem;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXDZCTJW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a class="demo-home-link" href="index.html">Back to Sanctify homepage</a>
+
     <main class="screen">
-      <img class="watermark" src="assets/sanctify-logo-transparent.png" alt="" aria-hidden="true" />
+      <img class="brand-logo screen-logo" src="assets/sanctify-logo-wordmark.png" alt="Sanctify" />
+
       <section class="card" aria-label="Sanctify block page example">
-        <img class="brand" src="assets/sanctify-logo-transparent.png" alt="Sanctify" />
         <div class="seal" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            <path d="m9 12 2 2 4-4"></path>
+          <svg viewBox="0 0 24 24" fill="none" role="img">
+            <path
+              d="M12 3.25l7 2.8v5.2c0 4.15-2.78 7.95-7 9.5-4.22-1.55-7-5.35-7-9.5v-5.2l7-2.8z"
+              stroke="currentColor"
+              stroke-width="1.9"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.7 12.2l2.15 2.15 4.7-5.05"
+              stroke="currentColor"
+              stroke-width="1.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
-        <h1>Peace be with you.</h1>
+
+        <h1>Peace Be With You</h1>
         <p class="lede">
-          This page has been filtered by your family’s protection settings. That moment can stay calm,
-          private, and faith-affirming.
+          This page was filtered by your family's protection settings. Take a breath and choose a
+          better next step.
         </p>
 
         <article class="verse">
-          <p class="verse-text">
-            “Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God
-            will be with you wherever you go.”
-          </p>
-          <div class="verse-ref">Joshua 1:9</div>
+          <p class="verse-text">The Lord bless you and keep you.</p>
+          <div class="verse-ref">Numbers 6:24</div>
         </article>
 
         <div class="actions">
           <button class="btn secondary" type="button">Another verse</button>
           <button class="btn primary" type="button">Reach out to Pastor Johnson</button>
-          <button class="btn ghost" type="button">Go back</button>
+          <a class="btn ghost" href="index.html">Back to homepage</a>
         </div>
 
         <p class="privacy">Your shepherd sees the message, not the blocked site.</p>
       </section>
+
+      <div class="bottom-brand">Sanctify</div>
     </main>
   </body>
 </html>

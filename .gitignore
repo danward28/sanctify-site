@@ -1,0 +1,22 @@
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+
+# Local Codex/browser artifacts
+.codex-spreadsheet-build/
+.playwright-cli/
+.tools/
+output/
+outputs/
+tmp/
+
+# Separate projects/repositories that should not be vendored into this site repo
+sanctify-app/
+sanctify-redesign/
+coastal-research-platform/
+coastal-research-revamp/
+uap-research-vault/
+
+# Generated Python bytecode under utility scripts
+scripts/__pycache__/

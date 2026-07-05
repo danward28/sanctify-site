@@ -2,15 +2,19 @@ DirectoryIndex index.html
 
 RewriteEngine On
 
-RewriteRule ^pricing-2/?$ /pricing.html [R=301,L]
-RewriteRule ^pricing/?$ /pricing.html [R=301,L]
-RewriteRule ^how-it-works/?$ /how-it-works.html [R=301,L]
-RewriteRule ^for-shepherds/?$ /for-shepherds.html [R=301,L]
-RewriteRule ^about/?$ /about.html [R=301,L]
-RewriteRule ^contact/?$ /contact.html [R=301,L]
-RewriteRule ^signup/?$ /signup.html [R=301,L]
-RewriteRule ^privacy-policy/?$ /privacy-policy.html [R=301,L]
-RewriteRule ^terms/?$ /terms.html [R=301,L]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^sanctify\.faith$ [NC]
+RewriteRule ^ https://sanctify.faith%{REQUEST_URI} [R=301,L]
+
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteRule ^pricing-2/?$ /pricing [R=301,L]
+RewriteRule ^terms-of-service(?:\.html)?/?$ /terms [R=301,L]
+RewriteRule ^family-internet-safety-guide/?$ /first-phone-kit [R=301,L]
+RewriteRule ^family-internet-safety-guide\.html$ /first-phone-kit [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f

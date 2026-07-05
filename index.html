@@ -1,593 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Sanctify filters the internet according to your family's faith tradition."
-    />
-    <link rel="canonical" href="https://sanctify.faith/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Sanctify | Internet protection, guided by faith" />
-    <meta
-      property="og:description"
-      content="Faith-guided internet protection for families who want a calmer online environment at home."
-    />
-    <meta property="og:url" content="https://sanctify.faith/" />
-    <meta
-      property="og:image"
-      content="https://sanctify.faith/assets/dashboard-mockup.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <title>Sanctify | Internet protection, guided by faith</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "name": "Sanctify Faith LLC",
-            "url": "https://sanctify.faith",
-            "logo": "https://sanctify.faith/assets/sanctify-logo-transparent.png",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "30 N Gould St. STE R",
-              "addressLocality": "Sheridan",
-              "addressRegion": "WY",
-              "postalCode": "82801",
-              "addressCountry": "US"
-            },
-            "contactPoint": [
-              {
-                "@type": "ContactPoint",
-                "contactType": "customer support",
-                "email": "info@sanctify.faith"
-              }
-            ]
-          },
-          {
-            "@type": "SoftwareApplication",
-            "name": "Sanctify",
-            "applicationCategory": "SecurityApplication",
-            "operatingSystem": "iOS, Android, Web",
-            "url": "https://sanctify.faith",
-            "offers": {
-              "@type": "Offer",
-              "priceCurrency": "USD",
-              "price": "9.99"
-            },
-            "description": "Faith-guided internet protection for homes that want filtering aligned with their values."
-          }
-        ]
-      }
-    </script>
-  </head>
-  <body>
-    <header class="site-header" data-header>
-      <a class="brand" href="index.html" aria-label="Sanctify home">
-        <img src="assets/sanctify-logo-transparent.png" alt="Sanctify" />
-      </a>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctify | Faith-aware protection for the AI-era internet</title>
+<link rel="canonical" href="https://sanctify.faith/">
+<meta name="description" content="Faith-guided internet protection for families facing AI companions, deepfakes, adult content, sextortion risk, and unsafe AI use across every household device.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sanctify | Faith-aware protection for the AI-era internet">
+<meta property="og:description" content="A calmer, faith-shaped filter for the internet your family is facing now.">
+<meta property="og:image" content="https://sanctify.faith/assets/family-kitchen.jpg">
+<meta property="og:url" content="https://sanctify.faith/">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MXDZCTJW');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Sanctify Faith LLC","url":"https://sanctify.faith/","logo":"https://sanctify.faith/assets/sanctify-logo-nav.png","sameAs":[]}
+</script>
+<link rel="stylesheet" href="/assets/css/tokens.css?v=20260702-conversion">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20260702-giveback">
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXDZCTJW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        Menu
-      </button>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="https://sanctify.faith/" class="logo" aria-label="Sanctify home"><img src="/assets/sanctify-logo-nav.png" alt="Sanctify"></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg class="icon"><use href="/assets/icons.svg#i-menu"/></svg></button>
+    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+      <a href="/how-it-works">How it works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/for-shepherds">For shepherds</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a class="nav-cta" href="https://app.sanctify.faith/signup" data-track="nav_start_trial_click" data-surface="nav">Start free trial</a>
+    </nav>
+  </div>
+</header>
 
-      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="how-it-works.html">How it works</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="for-shepherds.html">For shepherds</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a
-          class="mobile-nav-cta"
-          href="https://app.sanctify.faith/signup"
-          data-track="nav_get_started_click"
-          data-surface="mobile_nav"
-        >Get started</a>
-      </nav>
-
-      <a
-        class="header-cta"
-        href="https://app.sanctify.faith/signup"
-        data-track="nav_get_started_click"
-        data-surface="header"
-      >Get started</a>
-    </header>
-
-    <main>
-      <section class="hero" data-tilt>
-        <img
-          class="brand-watermark"
-          src="assets/sanctify-logo-transparent.png"
-          alt=""
-          aria-hidden="true"
-        />
-
-        <div class="hero-copy">
-          <h1>Faith-guided protection for every screen at home.</h1>
-          <p class="hero-lede">
-            Choose your tradition, connect the devices you already use, and give blocked moments a
-            private path back to care.
-          </p>
-          <div class="hero-actions">
-            <a
-              class="button primary"
-              href="https://app.sanctify.faith/signup"
-              data-track="hero_cta_click"
-              data-surface="home_hero"
-            >Start 7-day trial</a>
-            <a class="button secondary" href="how-it-works.html">See setup</a>
-          </div>
-          <div class="hero-brief">
-            <p class="hero-microcopy">
-              Start with the $9.99 household plan. Add Smart Filter AI when you want protection
-              that keeps learning.
-            </p>
-            <div class="hero-proof-row" aria-label="Sanctify plan highlights">
-              <span>
-                <strong>7 days free</strong>
-                No card to start
-              </span>
-              <span>
-                <strong>15 devices</strong>
-                Phones, laptops, TVs, and Wi-Fi
-              </span>
-              <span>
-                <strong>Gives back</strong>
-                Support your church, mosque, or synagogue
-              </span>
-            </div>
-          </div>
-          <div class="store-badges" aria-label="App download options">
-            <span class="store-label">Mobile apps available after signup</span>
-            <a
-              href="https://app.sanctify.faith/signup"
-              data-track="hero_cta_click"
-              data-surface="home_app_store_badge"
-            >
-              <img src="assets/app-store.svg" alt="Download on the App Store" />
-            </a>
-            <a
-              href="https://app.sanctify.faith/signup"
-              data-track="hero_cta_click"
-              data-surface="home_google_play_badge"
-            >
-              <img src="assets/google-play.png" alt="Get it on Google Play" />
-            </a>
-          </div>
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Faith-shaped internet protection</p>
+        <h1>Protection for the internet your family is facing now.</h1>
+        <p class="lead">Sanctify blocks AI-era threats, explicit content, predatory destinations, and unsafe AI use across every device in your home, then replaces shame with a calm next step shaped by your faith.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://app.sanctify.faith/signup?plan=annual" data-track="hero_start_trial_click" data-surface="hero" data-plan="annual">Start your 7-day free trial</a>
+          <a class="btn btn-ghost" href="/how-it-works" data-track="hero_how_it_works_click" data-surface="hero">See how it works</a>
+          <a class="btn btn-ghost" href="/first-phone-kit" data-open-lead-magnet data-track="hero_first_phone_kit_click" data-surface="hero">Get the First-Phone Kit</a>
         </div>
-
-        <div class="hero-stage" aria-label="Sanctify product preview">
-          <img
-            class="product-shot"
-            src="assets/dashboard-mockup.png"
-            alt="Sanctify dashboard preview"
-            width="1024"
-            height="1536"
-            fetchpriority="high"
-          />
-          <div class="stage-rail" aria-hidden="true">
-            <span>Set up today</span>
-            <strong>Pick faith profile</strong>
-            <strong>Connect devices</strong>
-            <strong>Keep block pages private</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="path-strip reveal" aria-labelledby="path-strip-title">
-        <div class="path-strip-copy">
-          <span>Start where you are</span>
-          <h2 id="path-strip-title">One product. Three clear paths.</h2>
-        </div>
-        <div class="path-links">
-          <a
-            class="path-link"
-            href="https://app.sanctify.faith/signup"
-            data-track="cta_click"
-            data-surface="home_path_family"
-          >
-            <span>Families</span>
-            <strong>Start the trial</strong>
-            <small>Protect the household devices you already use.</small>
-          </a>
-          <a
-            class="path-link"
-            href="https://app.sanctify.faith/signup?plan=annual&amp;ai=1&amp;checkout=1"
-            data-track="ai_upgrade_click"
-            data-surface="home_path_ai"
-            data-plan="annual_ai"
-          >
-            <span>Smart Filter AI</span>
-            <strong>Choose annual + AI</strong>
-            <small>Keep protection current as new sites appear.</small>
-          </a>
-          <a
-            class="path-link"
-            href="for-shepherds.html"
-            data-track="cta_click"
-            data-surface="home_path_shepherds"
-          >
-            <span>Shepherds</span>
-            <strong>Support your people</strong>
-            <small>Offer Sanctify through your organization.</small>
-          </a>
-        </div>
-      </section>
-
-      <section class="section why-now" id="why-now">
-        <div class="why-now-grid">
-          <div class="why-now-copy reveal">
-            <span class="section-tag">Why Sanctify now</span>
-            <h2>Static filters were built for a slower internet.</h2>
-            <p>
-              New sites, private browsers, app stores, and AI-generated pages move faster than old
-              blocklists. Sanctify combines a large filtering base, faith profiles, Smart Filter AI,
-              private block pages, and a guided app setup so protection can keep moving.
-            </p>
-            <div class="why-now-actions">
-              <a
-                class="button primary"
-                href="https://app.sanctify.faith/signup"
-                data-track="cta_click"
-                data-surface="home_why_now"
-              >Start before the next workaround</a>
-              <a class="button secondary" href="how-it-works.html">See the setup</a>
-            </div>
-          </div>
-
-          <div class="why-now-list reveal" aria-label="How Sanctify is different">
-            <div class="why-now-row">
-              <span>Generic filters</span>
-              <strong>Block categories and stop there.</strong>
-            </div>
-            <div class="why-now-row">
-              <span>Sanctify</span>
-              <strong>Shapes protection around your faith, devices, and care path.</strong>
-            </div>
-            <div class="why-now-row">
-              <span>Old model</span>
-              <strong>Waits for blocklists to catch up.</strong>
-            </div>
-            <div class="why-now-row">
-              <span>Our model</span>
-              <strong>Uses Smart Filter AI to keep finding new risks.</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section ai-spotlight">
-        <div class="ai-spotlight-grid">
-          <div class="reveal">
-            <span class="ai-kicker">Smart Filter AI</span>
-            <h2>Protection that keeps up as the internet changes.</h2>
-            <p class="ai-subline">
-              Smart Filter AI reviews new domains, honors the faith profile you selected, and helps
-              your block lists keep growing.
-            </p>
-            <div class="ai-action-strip">
-              <div class="ai-action" data-step="01">
-                <span>Tracks</span>
-                <strong>New sites</strong>
-              </div>
-              <div class="ai-action" data-step="02">
-                <span>Honors</span>
-                <strong>Your faith</strong>
-              </div>
-              <div class="ai-action" data-step="03">
-                <span>Keeps</span>
-                <strong>Protection current</strong>
-              </div>
-            </div>
-            <div class="ai-actions">
-              <a
-                class="button primary"
-                href="https://app.sanctify.faith/signup?plan=annual&amp;ai=1&amp;checkout=1"
-                data-track="ai_upgrade_click"
-                data-surface="home_ai_spotlight"
-                data-plan="annual_ai"
-              >Start annual + AI</a>
-            </div>
-          </div>
-
-          <div class="ai-stage reveal">
-            <div class="ai-featured-price">
-              <span class="ai-stage-label">Most chosen upgrade</span>
-              <strong>+$10<span>/month</span></strong>
-              <p class="ai-price-note">$120 per year on annual billing.</p>
-              <div class="ai-stream" aria-hidden="true">
-                <div class="ai-stream-row">
-                  <span>New sites</span>
-                  <i></i>
-                </div>
-                <div class="ai-stream-row">
-                  <span>Faith fit</span>
-                  <i></i>
-                </div>
-                <div class="ai-stream-row">
-                  <span>Protection</span>
-                  <i></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-story" id="how">
-        <div class="section-heading reveal">
-          <h2>Setup should feel obvious.</h2>
-          <p>
-            Sanctify keeps the work simple: choose a profile, follow the device guide, and let the
-            protection run quietly in the background.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card reveal">
-            <span class="feature-number">01</span>
-            <div>
-              <h3>Choose the language of your home</h3>
-              <p>Start with a profile shaped around the values your household keeps.</p>
-            </div>
-          </article>
-          <article class="feature-card reveal">
-            <span class="feature-number">02</span>
-            <div>
-              <h3>Connect the devices that matter</h3>
-              <p>Follow the guide for phones, laptops, TVs, and home Wi-Fi.</p>
-            </div>
-          </article>
-          <article class="feature-card reveal">
-            <span class="feature-number">03</span>
-            <div>
-              <h3>Keep correction private</h3>
-              <p>Blocked pages stay measured, discreet, and easy to respond to.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section profiles" id="profiles">
-        <div class="section-heading reveal">
-          <h2>Begin with your own tradition.</h2>
-          <p>
-            Each tradition carries a different language for discipline, modesty, media, and care.
-            Sanctify starts there.
-          </p>
-        </div>
-
-        <div class="profile-console reveal">
-          <div class="profile-tabs" role="tablist" aria-label="Faith profiles">
-            <button
-              class="profile-tab active"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              data-profile="evangelical"
-            >
-              Evangelical
-            </button>
-            <button
-              class="profile-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-profile="mainline"
-            >
-              Mainline Protestant
-            </button>
-            <button
-              class="profile-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-profile="catholic"
-            >
-              Catholic
-            </button>
-            <button class="profile-tab" type="button" role="tab" aria-selected="false" data-profile="lds">
-              Latter-day Saints
-            </button>
-            <button
-              class="profile-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-profile="jewish"
-            >
-              Orthodox Jewish
-            </button>
-            <button
-              class="profile-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-profile="muslim"
-            >
-              Muslim
-            </button>
-          </div>
-
-          <div class="profile-panel" role="tabpanel" aria-live="polite">
-            <h3 data-profile-title>Boundaries for discipleship at home.</h3>
-            <p data-profile-copy>
-              A quieter layer of protection around explicit content, addictive patterns, and media
-              that works against the standards your family is keeping.
-            </p>
-            <div class="filter-stack" aria-label="Example filter categories">
-              <span data-chip-one>Adult content</span>
-              <span data-chip-two>Predatory media</span>
-              <span data-chip-three>High-risk searches</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section block-moment" id="blocked">
-        <div class="phone-demo reveal" aria-label="Sanctify blocked page demo">
-          <div class="phone-speaker"></div>
-          <div class="blockpage-preview" aria-hidden="true">
-            <img class="blockpage-watermark" src="assets/sanctify-logo-transparent.png" alt="" />
-            <div class="blockpage-card">
-              <img class="blockpage-brand" src="assets/sanctify-logo-transparent.png" alt="" />
-              <div class="blockpage-seal">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <path d="m9 12 2 2 4-4"></path>
-                </svg>
-              </div>
-              <h3>Peace be with you.</h3>
-              <p class="blockpage-lede">
-                This page has been filtered by your family's protection settings. That moment can
-                stay calm, private, and faith-affirming.
-              </p>
-              <div class="blockpage-verse">
-                <p>
-                  Be strong and courageous. Do not be afraid; the Lord your God will be with you
-                  wherever you go.
-                </p>
-                <span>Joshua 1:9</span>
-              </div>
-              <div class="blockpage-actions">
-                <span>Another verse</span>
-                <strong>Reach out to Pastor Johnson</strong>
-                <span>Go back</span>
-              </div>
-              <p class="blockpage-privacy">Your shepherd sees the message, not the blocked site.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="block-copy reveal">
-          <h2>Private by default. Gentle in the moment.</h2>
-          <p>
-            A blocked page should not feel like an alarm. Sanctify keeps the message simple, offers
-            a path to guidance, and keeps the page itself private.
-          </p>
-          <ul class="check-list">
-            <li>Faith-affirming language from your tradition</li>
-            <li>One-tap spiritual outreach</li>
-            <li>No exposed URLs in family notifications</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section ecosystem" id="community">
-        <div class="section-heading reveal">
-          <h2>Protection can also support the community families already trust.</h2>
-          <p>
-            When a church, mosque, or synagogue offers Sanctify, families can subscribe through that
-            organization and a share returns to that same community.
-          </p>
-        </div>
-
-        <div class="ecosystem-grid">
-          <article class="ecosystem-card reveal">
-            <h3>Families gain protection</h3>
-            <p>Simple setup, clear boundaries, and consistent care across every device.</p>
-          </article>
-          <article class="ecosystem-card reveal">
-            <h3>Shepherds gain a care channel</h3>
-            <p>Support can happen at the moment someone asks for guidance.</p>
-          </article>
-          <article class="ecosystem-card reveal">
-            <h3>Communities gain recurring support</h3>
-            <p>Subscription revenue can stay close to the values and people a family already trusts.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="pricing-band" id="pricing">
-        <div class="pricing-copy reveal">
-          <h2>Start for $9.99. Add intelligence when you need it.</h2>
-          <p>Protect up to 15 household devices, then add Smart Filter AI or extra device packs when your home needs more coverage.</p>
-        </div>
-        <div class="price-card reveal" aria-label="Sanctify monthly price">
-          <span class="price">$9.99</span>
-          <span class="term">per month</span>
-          <p class="plan-note">Most complete setup: annual billing plus Smart Filter AI. Extra device packs are $3/month for each additional 15 devices.</p>
-          <a
-            class="button primary"
-            href="https://app.sanctify.faith/signup"
-            data-track="cta_click"
-            data-surface="home_pricing_band"
-          >Start free trial</a>
-          <a class="text-link" href="pricing.html">See plans and upgrades</a>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="lead-capture-card reveal">
-          <div class="lead-capture-copy">
-            <span class="section-tag">Stay in touch</span>
-            <h2>Want the setup checklist first?</h2>
-            <p>
-              Leave your email and Sanctify will send the most relevant next step for your
-              household, shepherd team, or organization.
-            </p>
-          </div>
-          <form
-            class="lead-capture-form"
-            data-lead-form
-            data-track-submit="lead_capture_submit"
-            data-surface="home_lead_capture"
-          >
-            <div class="lead-capture-grid">
-              <label>
-                First name
-                <input name="name" autocomplete="given-name" />
-              </label>
-              <label>
-                Email address
-                <input name="email" type="email" autocomplete="email" required />
-              </label>
-            </div>
-            <label>
-              Best fit
-              <select name="interestTag">
-                <option value="family">Family protection</option>
-                <option value="smart-filter-ai">Smart Filter AI</option>
-                <option value="shepherd">Shepherd partnership</option>
-                <option value="organization">Organization rollout</option>
-              </select>
-            </label>
-            <label class="lead-consent">
-              <input name="marketingConsent" type="checkbox" required />
-              Email me Sanctify updates and offers. I can unsubscribe at any time.
-            </label>
-            <div class="lead-capture-actions">
-              <button class="button primary" type="submit">Keep me posted</button>
-              <p class="lead-capture-status" data-lead-status>
-                Updates are only sent if you opt in.
-              </p>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <a class="brand footer-brand" href="index.html" aria-label="Sanctify home">
-        <img src="assets/sanctify-logo-transparent.png" alt="Sanctify" />
-      </a>
-      <div class="footer-copy">
-        <p>Internet protection, guided by faith.</p>
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="privacy-policy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
-          <a href="contact.html">Contact</a>
-        </nav>
+        <span class="trial-pill"><svg class="icon" style="width:16px;height:16px"><use href="/assets/icons.svg#i-shield"/></svg> No credit card for the filtering trial</span>
+        <p class="cost-note">Most families start with the core filter at $9.99/mo after the trial. Add AI Portal later only if your household needs protected AI access.</p>
       </div>
-    </footer>
+      <div class="hero-media">
+        <img src="/assets/family-kitchen.jpg" alt="A family gathered at the kitchen table">
+        <div class="hero-badge">
+          <div><b>15</b><span>devices covered</span></div>
+          <div class="sep"></div>
+          <div><b>10%</b><span>faith give-back</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/TWQUrK/klaviyo.js?company_id=TWQUrK"></script>
-    <script type="text/javascript">
-      !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();
-    </script>
-    <script src="script.js"></script>
-  </body>
+  <section class="reassurance-band" aria-label="Trial and guarantee details">
+    <div class="wrap">
+      <div class="reassurance-grid">
+        <article class="reassurance-card"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-shield"/></svg></span><h3>7-day filtering trial</h3><p>No credit card required for the household filtering trial.</p></article>
+        <article class="reassurance-card"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-check"/></svg></span><h3>30-day money-back guarantee</h3><p>If Sanctify is not the right fit after you subscribe, ask for a refund within 30 days.</p></article>
+        <article class="reassurance-card"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-heart"/></svg></span><h3>Faith-shaped defaults</h3><p>Profiles shape scripture, tone, and categories without exposing browsing history to leaders.</p></article>
+        <article class="reassurance-card"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-device"/></svg></span><h3>Most homes are covered</h3><p>The core plan protects up to 15 household devices before add-ons are needed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap strip-inner">
+      <span>Protects the screens families actually use:</span>
+      <div class="devices"><b>iPhone</b><b>Android</b><b>Mac</b><b>Windows</b><b>Chromebook</b><b>Smart TVs</b><b>Home Wi-Fi</b></div>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Covered before dinner</p>
+        <h2>A calmer setup for non-technical families.</h2>
+        <p class="lead">Choose your faith profile, follow guided device instructions, and let Sanctify run quietly in the background.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><span class="n">STEP 1</span><h3>Choose your household standard.</h3><p>Catholic, Protestant, Orthodox, LDS, Jewish, Muslim, and other faith expressions shape defaults, scripture, and tone.</p></article>
+        <article class="step"><span class="n">STEP 2</span><h3>Protect every device.</h3><p>Phones, laptops, tablets, TVs, and home Wi-Fi follow the same household protection layer.</p></article>
+        <article class="step"><span class="n">STEP 3</span><h3>Stay current.</h3><p>Public safety feeds, curated faith overlays, and optional adaptive recommendations keep the filter relevant.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight bg-bone2">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Why old filters are behind</p>
+        <h2>The new internet does not always look like a bad website.</h2>
+        <p class="lead">The most dangerous moments now happen inside AI chats, image tools, anonymous rooms, and platforms built to feel private.</p>
+      </div>
+      <div class="threats">
+        <article class="threat dark"><span class="icon-tile on-dark"><svg class="icon"><use href="/assets/icons.svg#i-chat"/></svg></span><h3>AI companions</h3><p>Private emotional attachments can form without ever looking like adult content to a generic filter.</p></article>
+        <article class="threat dark"><span class="icon-tile on-dark"><svg class="icon"><use href="/assets/icons.svg#i-alert"/></svg></span><h3>Deepfake tools</h3><p>Nudifier and image manipulation services are treated as their own threat category, not a vague web label.</p></article>
+        <article class="threat dark"><span class="icon-tile on-dark"><svg class="icon"><use href="/assets/icons.svg#i-lock"/></svg></span><h3>Sextortion risk</h3><p>Anonymous chat, coercion, and blackmail destinations get tighter handling than ordinary social media.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap feature">
+      <div class="feature-media">
+        <img src="/assets/blockpage-mockup-clean.jpg" alt="Sanctify block page shown on a phone">
+      </div>
+      <div>
+        <p class="eyebrow">The block-page moment</p>
+        <h2>A blocked page should feel like a hand on the shoulder.</h2>
+        <p class="lead">Sanctify blocks the destination, but the page itself keeps the moment calm: scripture, a better next step, and a private path to ask for help.</p>
+        <ul>
+          <li>Faith-specific scripture<span>The verse library changes by household faith profile and can be expanded without AI generation.</span></li>
+          <li>Private support by invitation<span>A family can reach out to a shepherd without exposing browsing history.</span></li>
+          <li>Reporting when a block seems wrong<span>Families can flag mistakes so protection improves without weakening the standard.</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="/blockpage-demo" style="margin-top:28px">Preview the block page</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight" id="ai-portal">
+    <div class="wrap">
+      <div class="portal">
+        <div class="portal-grid">
+          <div>
+            <p class="eyebrow">Optional protected AI add-on</p>
+            <h2>A safer AI space for homework and everyday questions.</h2>
+            <p class="portal-lead">Sanctify AI Portal is not the household filter. It is a separate protected workspace for productive AI use, with prompt safety checks and predictable usage limits.</p>
+            <div class="portal-feats">
+              <div class="portal-feat"><span class="dot"><svg class="icon"><use href="/assets/icons.svg#i-sparkles"/></svg></span><div><b>Useful AI, inside guardrails</b><p>Homework help, planning, writing support, and practical questions.</p></div></div>
+              <div class="portal-feat"><span class="dot"><svg class="icon"><use href="/assets/icons.svg#i-shield"/></svg></span><div><b>Unsafe prompts redirected</b><p>Sexual content, evasion, grooming, and self-harm signals are caught in real time.</p></div></div>
+              <div class="portal-feat"><span class="dot"><svg class="icon"><use href="/assets/icons.svg#i-clock"/></svg></span><div><b>Predictable monthly access</b><p>AI usage stays capped and is billed separately from household filtering.</p></div></div>
+            </div>
+            <a class="btn btn-light" href="https://app.sanctify.faith/signup?aiPortal=1" data-track="ai_portal_cta_click" data-surface="ai_portal">Add AI Portal - $10/mo</a>
+            <p class="portal-price">Start with filtering first, or add protected AI access when your family needs it.</p>
+          </div>
+          <div class="portal-card">
+            <div class="portal-chat">
+              <div class="bubble user">Can you help me plan a report for school?</div>
+              <div class="bubble ai">Yes. Tell me the topic, grade level, and what your teacher asked for.</div>
+              <div class="bubble user">how do I get around my family filter</div>
+              <div class="bubble flag">Redirected - Sanctify keeps the conversation safe. Let us get back to your assignment.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight bg-bone2">
+    <div class="wrap">
+      <div class="founder">
+        <div>
+          <img src="/assets/founder-dan-ward.jpg" alt="Dr. Daniel Ward, founder of Sanctify">
+          <p class="creds">PhD  -  MBA  -  CISM  -  CEH</p>
+        </div>
+        <div>
+          <p class="eyebrow">From the founder</p>
+          <blockquote>"I built Sanctify because the threats my own children face did not exist when I started in cybersecurity. A faith-based home needs protection that is current, calm, and pastoral."</blockquote>
+          <p class="sig"><b>Dr. Daniel Ward, Ph.D.</b>Founder &amp; CEO, Sanctify Faith</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="pricing">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Simple pricing</p>
+        <h2>Start with the household filter.</h2>
+        <p class="lead">Most families start with core filtering at $9.99/mo after the trial. Add AI Portal later only if your household needs protected AI access.</p>
+      </div>
+      <div class="pricing">
+        <article class="plan">
+          <h3>Monthly</h3>
+          <div class="price">$9.99<small>/mo</small></div>
+          <p class="sub">Flexible household protection.</p>
+          <ul><li>Up to 15 household devices</li><li>Faith-specific profile</li><li>Calm block pages</li><li>Public and curated block lists</li></ul>
+          <a class="btn btn-ghost btn-block" href="https://app.sanctify.faith/signup?plan=monthly" data-track="pricing_monthly_click" data-surface="home_pricing" data-plan="monthly">Start 7-day trial</a>
+        </article>
+        <article class="plan featured">
+          <span class="tag">SAVE 20%  -  RECOMMENDED</span>
+          <h3>Annual</h3>
+          <div class="price">$7.99<small>/mo</small></div>
+          <p class="sub">Billed yearly at $95.88.</p>
+          <ul><li>Everything in Monthly</li><li>Two months free</li><li>Priority same-day support</li><li>10% can support your faith community</li></ul>
+          <a class="btn btn-primary btn-block" href="https://app.sanctify.faith/signup?plan=annual" data-track="pricing_annual_click" data-surface="home_pricing" data-plan="annual">Start 7-day trial</a>
+        </article>
+      </div>
+      <div class="pricing-reassurance">
+        <p><b>Risk reversal:</b> 7-day filtering trial, no credit card required. Paid filtering subscriptions include a 30-day money-back guarantee.</p>
+        <p><b>Add-ons stay optional:</b> Adaptive filter recommendations are $10/mo, AI Portal is $10/mo, and extra 15-device packs are $3/mo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight" id="congregations">
+    <div class="wrap">
+      <div class="congregation">
+        <div>
+          <p class="eyebrow">For churches, parishes, synagogues, and mosques</p>
+          <h2>Protection can support the faith community too.</h2>
+          <p class="lead">Sanctify returns 10% of every eligible connected household subscription to the participating faith community each month, for the life of the subscription.*</p>
+          <p class="giveback-note"><sup>*</sup>Faith give-back: Support dollars begin after the first 30 days to keep refunds clean for families and partner organizations.</p>
+          <a class="btn btn-primary" href="/for-shepherds" data-track="congregation_model_click" data-surface="home_congregation">See the earnings model</a>
+        </div>
+        <div class="cong-stat">
+          <b>10%</b>
+          <span>monthly give-back on connected subscriptions*</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="center"><p class="eyebrow">Common questions</p><h2>What families ask first.</h2></div>
+      <div class="faq">
+        <details open><summary>What makes Sanctify different from ordinary filters?</summary><p>Sanctify is built around AI-era threats and faith-shaped correction. It blocks dangerous destinations while keeping the blocked moment calm, private, and oriented toward formation.</p></details>
+        <details><summary>Does Sanctify replace parenting or pastoral care?</summary><p>No. It removes some of the constant technical exposure so parents and faith leaders can focus on trust, conversation, and formation.</p></details>
+        <details><summary>Does the AI Portal include the filtering trial?</summary><p>The 7-day trial applies to household filtering. Sanctify AI Portal is optional monthly access that starts when added because live model usage creates direct costs.</p></details>
+        <details><summary>What is the refund policy?</summary><p>The filtering trial is free for 7 days with no credit card required. After a family subscribes, paid filtering subscriptions include a 30-day money-back guarantee.</p></details>
+        <details><summary>Can my faith leader see browsing history?</summary><p>No. Shepherd support is by invitation. Leaders never receive URLs, searches, or browsing history from your household.</p></details>
+        <details><summary>Which faith profiles are supported?</summary><p>Sanctify supports Catholic, Protestant Evangelical, Mainline Protestant, Orthodox Christian, LDS, Jewish, Muslim, and additional faith expressions that can be expanded over time.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="final">
+        <h2>Protect the home before the next app creates the next hidden room.</h2>
+        <p>Seven days free for filtering. No credit card required. Paid filtering subscriptions include a 30-day money-back guarantee.</p>
+        <a class="btn btn-light" href="https://app.sanctify.faith/signup?plan=annual" data-track="final_start_trial_click" data-surface="final_cta" data-plan="annual">Start your 7-day free trial</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<aside class="quick-help" data-quick-help aria-label="Quick questions">
+  <button class="quick-help-toggle" type="button" data-help-toggle aria-expanded="false" aria-controls="quickHelpPanel" data-track="quick_help_toggle_click" data-surface="home_quick_help">Questions?</button>
+  <div class="quick-help-panel" id="quickHelpPanel" data-help-panel hidden>
+    <div class="quick-help-head">
+      <div>
+        <p class="eyebrow">Before you start</p>
+        <h2>Quick answers for cautious families.</h2>
+      </div>
+      <button class="quick-help-close" type="button" data-help-close aria-label="Close quick questions">Close</button>
+    </div>
+    <div class="quick-help-list">
+      <details open><summary>Do I need a credit card?</summary><p>No. The 7-day household filtering trial does not require a credit card.</p></details>
+      <details><summary>What will it cost later?</summary><p>Most families start with core filtering at $9.99/mo. AI Portal and adaptive recommendations are optional add-ons.</p></details>
+      <details><summary>What if setup feels technical?</summary><p>The setup flow is guided by device type. You can also contact us before starting if you are unsure.</p></details>
+      <details><summary>Can my church or parish get support?</summary><p>Yes. Connected faith communities can receive give-back support through eligible household subscriptions.</p></details>
+    </div>
+    <div class="quick-help-actions">
+      <a class="btn btn-primary" href="https://app.sanctify.faith/signup?plan=annual" data-track="quick_help_trial_click" data-surface="home_quick_help" data-plan="annual">Start free trial</a>
+      <a class="btn btn-ghost" href="/contact" data-track="quick_help_contact_click" data-surface="home_quick_help">Ask a question</a>
+    </div>
+  </div>
+</aside>
+
+<section class="lead-modal" data-lead-modal hidden role="dialog" aria-modal="true" aria-labelledby="family-safety-guide-title">
+  <div class="lead-modal-card">
+    <p class="eyebrow">Free First-Phone Kit</p>
+    <h2 id="family-safety-guide-title">A practical first conversation before the next device.</h2>
+    <p>Get the checklist, family covenant, and conversation script for talking about filters, AI companions, private devices, and safer next steps without turning the home into a courtroom.</p>
+    <form class="lead-capture-form" data-lead-form data-surface="home_first_phone_kit" data-lead-success="You are in. Open the First-Phone Kit now, and we will follow up with more practical guidance by email." data-lead-existing="That email already has a Sanctify account. You can still open the kit now.">
+      <div class="field">
+        <label for="lead-name">Name</label>
+        <input id="lead-name" name="name" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="lead-email">Email</label>
+        <input id="lead-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <input type="hidden" name="interestTag" value="first-phone-kit">
+      <label class="opt-toggle">
+        <input type="checkbox" name="marketingConsent" required>
+        <span><span class="o-title">Send me the kit and useful Sanctify updates</span><span class="o-sub">You can unsubscribe at any time.</span></span>
+      </label>
+      <p class="lead-capture-status" data-lead-status aria-live="polite"></p>
+      <div class="lead-modal-actions">
+        <button class="lead-modal-close" type="button" data-close-lead-magnet>Not now</button>
+        <a class="btn btn-ghost lead-download-link" href="/assets/first-phone-kit.pdf" data-lead-download hidden>Open the PDF</a>
+        <button class="btn btn-primary" type="submit">Send the kit</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <a href="https://sanctify.faith/" class="logo" aria-label="Sanctify home"><img src="/assets/sanctify-logo-nav.png" alt="Sanctify"></a>
+      <p>Internet protection, built for what your children actually face today.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/first-phone-kit">First-phone kit</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy-policy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/TWQUrK/klaviyo.js?company_id=TWQUrK"></script>
+<script type="text/javascript">
+  !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();
+</script>
+<script src="/script.js?v=20260702-conversion"></script>
+</body>
 </html>

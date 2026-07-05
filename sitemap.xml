@@ -2,42 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sanctify.faith/</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/how-it-works.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/how-it-works</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/pricing.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/pricing</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/for-shepherds.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/for-shepherds</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/about.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/catholic</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/contact.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/first-phone-kit</loc>
+    <lastmod>2026-06-02</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/signup.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/about</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/privacy-policy.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/contact</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/account-deletion.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <loc>https://sanctify.faith/signup</loc>
+    <lastmod>2026-05-30</lastmod>
   </url>
   <url>
-    <loc>https://sanctify.faith/terms.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://sanctify.faith/privacy-policy</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://sanctify.faith/account-deletion</loc>
+    <lastmod>2026-05-07</lastmod>
+  </url>
+  <url>
+    <loc>https://sanctify.faith/terms</loc>
+    <lastmod>2026-05-07</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,45 @@
+/* ============================================================
+   Sanctify Design Tokens
+   Single source of truth for color, type, spacing, elevation.
+   Load BEFORE styles.css.
+   ============================================================ */
+:root{
+  /* ---- Brand color ---- */
+  --evergreen:#15493B;        /* primary: buttons, headings accent, dark bands */
+  --evergreen-deep:#0E332A;   /* gradient end, darkest sections, notice bars */
+  --bone:#FAF7F1;             /* default page background */
+  --bone-2:#F2ECE1;           /* alternating sections, chips, code bg */
+  --sage:#E7EFE9;             /* tints, stat cards, focus rings */
+  --ink:#1A1C1B;              /* body text + headings */
+  --ink-soft:#4A524E;         /* secondary text, leads, captions */
+  --gold:#B5894F;             /* DECORATIVE accents only (borders, large marks) */
+  --gold-text:#8A6126;        /* small gold text on light (meets AA) */
+  --line:rgba(20,40,33,.12);  /* hairline borders + dividers */
+
+  /* ---- Block-page only ---- */
+  --mist:#DCEAE3;
+  --mist-2:#C6DCD2;
+
+  /* ---- Radius ---- */
+  --radius:20px;              /* default card */
+  --radius-lg:28px;           /* large bands */
+  --radius-pill:999px;
+  --radius-field:12px;
+
+  /* ---- Layout ---- */
+  --maxw:1180px;
+  --gutter:28px;
+
+  /* ---- Type ---- */
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif; /* wordmark + block-page scripture only */
+
+  /* ---- Elevation ---- */
+  --shadow-btn:0 8px 26px rgba(21,73,59,.28);
+  --shadow-btn-hover:0 12px 34px rgba(21,73,59,.34);
+  --shadow-media:0 28px 64px rgba(20,40,33,.18);
+  --shadow-card:0 20px 50px rgba(21,73,59,.14);
+
+  /* ---- Motion ---- */
+  --ease:cubic-bezier(.2,.6,.2,1);
+}

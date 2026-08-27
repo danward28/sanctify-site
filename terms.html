@@ -55,7 +55,7 @@
 
         <div class="subpage-copy reveal">
           <h1>Clear terms for household protection.</h1>
-          <p>Last updated: July 2, 2026</p>
+          <p>Last updated: August 27, 2026</p>
         </div>
       </section>
 
@@ -70,9 +70,11 @@
 
         <h2>1. Service Description</h2>
         <p>
-          Sanctify is a DNS-based content filtering service designed for families and faith
-          communities. The Service filters internet content at the DNS level, provides device
-          protection monitoring, and offers accountability features through our Shepherd program.
+          Sanctify is a layered internet protection service designed for families and faith
+          communities. The Service uses authenticated device and network enforcement to prevent
+          covered destinations from loading. In supported browsers, an optional local extension
+          can display a faith-specific Sanctify page. The Service also provides protection
+          monitoring and accountability features through our Shepherd program.
         </p>
 
         <h2>2. Account Registration</h2>
@@ -88,8 +90,8 @@
           <li>One subscription equals one household at one physical address.</li>
           <li>Each account supports a maximum of 15 devices.</li>
           <li>
-            Account sharing is prohibited. You may not share your account credentials or DNS
-            configuration with individuals outside your household.
+            Account sharing is prohibited. You may not share account, device, resolver, browser,
+            or network-protection credentials with individuals outside your household.
           </li>
           <li>
             We monitor device registrations, heartbeat patterns, IP addresses, and query volumes to
@@ -103,6 +105,22 @@
         <p>
           If you need to protect more than 15 devices, or have a unique household situation, contact
           us at <a href="mailto:info@sanctify.faith">info@sanctify.faith</a>.
+        </p>
+
+        <h2>3A. Browser Protection</h2>
+        <p>
+          Browser Protection is a companion to the household enforcement layer. It requires a
+          supported browser, the permissions disclosed during installation, and a valid Sanctify
+          family pairing. It can display the local Sanctify page for covered top-level website
+          navigation. Applications and browsers without a supported display mechanism may show
+          their ordinary connection message even when the destination is blocked.
+        </p>
+        <p>
+          The extension does not decrypt traffic or read page contents. It uses website addresses
+          as described in the <a href="https://sanctify.faith/privacy-policy">Privacy Policy</a>.
+          Submitting a false-positive review shares the reported domain with Sanctify support but
+          does not automatically unblock it. You may disconnect Browser Protection from its
+          settings at any time.
         </p>
 
         <h2>4. Subscription and Billing</h2>
@@ -174,7 +192,7 @@
         <p>You agree not to:</p>
         <ul>
           <li>Share your account with individuals outside your household</li>
-          <li>Attempt to circumvent or disable the DNS filtering service</li>
+          <li>Attempt to circumvent, disable, abuse, or redistribute the protection service</li>
           <li>Use the Service for any unlawful purpose</li>
           <li>Reverse engineer or interfere with the Service infrastructure</li>
           <li>Resell or redistribute access to the Service</li>
@@ -183,9 +201,10 @@
         <h2>8. Termination</h2>
         <p>
           You may cancel your account at any time. We may suspend or terminate your account if you
-          violate these Terms, including the Household and Device Policy. Upon termination, your DNS
-          filtering will be deactivated and your data will be deleted in accordance with our Privacy
-          Policy.
+          violate these Terms, including the Household and Device Policy. Upon termination,
+          filtering is deactivated, browser policies are disabled or revoked, and enrolled resolver
+          paths move to ordinary pass-through resolution so an old setup does not intentionally
+          break general internet access. Your data will be deleted in accordance with our Privacy Policy.
         </p>
 
         <h2>9. Limitation of Liability</h2>
@@ -227,6 +246,7 @@
       <div class="footer-copy">
         <p>Internet protection, built for what your children actually face today.</p>
         <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://sanctify.faith/browser-protection">Browser protection</a>
           <a href="https://sanctify.faith/privacy-policy">Privacy</a>
           <a href="https://sanctify.faith/terms">Terms</a>
           <a href="https://sanctify.faith/contact">Contact</a>

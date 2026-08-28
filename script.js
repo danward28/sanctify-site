@@ -749,6 +749,8 @@ const updateConsentUi = () => {
   const shouldShowBanner = consentBannerOpen || (consentPromptEligible && consentStatus === "unknown");
   consentBanner.hidden = !shouldShowBanner;
   consentManageButton.hidden = shouldShowBanner;
+  const quickHelpWidget = document.querySelector("[data-quick-help]");
+  if (quickHelpWidget) quickHelpWidget.hidden = shouldShowBanner;
 
   if (consentBannerStatus) {
       if (consentStatus === "granted") {
@@ -769,9 +771,9 @@ const injectConsentStyles = () => {
   style.textContent = `
     .sanctify-consent-manage {
       position: fixed;
-      right: 8px;
+      left: 8px;
       bottom: 8px;
-      z-index: 40;
+      z-index: 71;
       border: 1px solid rgba(23, 32, 31, 0.12);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.94);
@@ -794,7 +796,7 @@ const injectConsentStyles = () => {
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 41;
+      z-index: 90;
       padding: 0 16px 16px;
     }
     .sanctify-consent-card {
@@ -855,7 +857,8 @@ const injectConsentStyles = () => {
     }
     @media (max-width: 640px) {
       .sanctify-consent-manage {
-        right: 8px;
+        left: 8px;
+        right: auto;
         bottom: 8px;
         width: auto;
         max-width: calc(100vw - 24px);
@@ -865,15 +868,24 @@ const injectConsentStyles = () => {
       }
       .sanctify-consent-card {
         display: grid;
-        gap: 12px;
+        gap: 8px;
+        padding: 10px;
+      }
+      .sanctify-consent-card p {
+        font-size: 0.82rem;
+        line-height: 1.25;
       }
       .sanctify-consent-actions {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
       }
       .sanctify-consent-btn,
       .sanctify-consent-link {
         width: 100%;
+        min-height: 40px;
+        padding: 8px 6px;
+        font-size: 0.82rem;
       }
     }
   `;

@@ -104,7 +104,7 @@
           For each device you register, we collect the device name, platform, and a unique device
           identifier. We also collect health signals such as app version, OS version, battery
           level, and protection status so we can tell whether filtering is active and working.
-          Browser Protection uses a separate random installation identifier and browser-scoped
+          Local intervention uses a separate random installation identifier and device- or browser-scoped
           credential so it can receive the correct signed household policy. Credentials are
           stored as keyed hashes on Sanctify systems.
         </p>
@@ -117,12 +117,12 @@
           browsing-history product. Specific browsing history is not shown to shepherds.
         </p>
 
-        <h3>Browser Protection Website Addresses</h3>
+        <h3>Local Protection Website Addresses</h3>
         <p>
-          The Sanctify browser extension uses the address of a top-level website to recognize a
-          destination covered by the household policy and display a local Sanctify page. The
-          extension does not read page contents. The recent address is held in temporary browser
-          session storage for no more than five minutes so you can choose to report a mistaken
+          The Sanctify mobile and browser protection clients use a website or domain address to recognize a
+          destination covered by the household policy and display a local Sanctify page. They do
+          not read page contents. The recent blocked address is held in temporary local storage
+          for no more than five minutes so you can choose to report a mistaken
           block. Routine intervention events send only a rotating, keyed fingerprint rather than a
           readable domain. The actual domain is transmitted to Sanctify only when you explicitly
           select <strong>This should not be blocked</strong> and submit a review request.
@@ -220,8 +220,8 @@
           does not block account access, filtering, or billing.
         </p>
         <p>
-          Browser Protection also uses essential extension storage for its random installation
-          identifier, browser-scoped credential, last verified signed household policy, and the
+          Local protection also uses essential device or extension storage for its random installation
+          identifier, scoped credential, last verified signed household policy, and the
           short-lived website-address context described above. That operational storage is required
           to provide the extension and is separate from optional marketing or analytics cookies.
           Disconnecting the extension removes its credential and policy from browser storage.

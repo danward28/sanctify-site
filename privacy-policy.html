@@ -123,9 +123,11 @@
           destination covered by the household policy and display a local Sanctify page. They do
           not read page contents. The recent blocked address is held in temporary local storage
           for no more than five minutes so you can choose to report a mistaken
-          block. Routine intervention events send only a rotating, keyed fingerprint rather than a
-          readable domain. The actual domain is transmitted to Sanctify only when you explicitly
-          select <strong>This should not be blocked</strong> and submit a review request.
+          block. For routine intervention events, the blocked domain is sent over an encrypted
+          connection and immediately converted to a rotating, keyed fingerprint before storage;
+          Sanctify does not retain a readable domain for those events. The readable domain is
+          retained only when you explicitly select <strong>This should not be blocked</strong> and
+          submit a review request.
         </p>
         <p>
           A message sent to a connected shepherd contains only the text you choose to send. It

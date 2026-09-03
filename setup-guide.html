@@ -26,7 +26,7 @@
   "description":"Turn on Sanctify filtering and the calm intervention experience on supported family devices.",
   "step":[
     {"@type":"HowToStep","name":"Sign in","text":"Sign in to the Sanctify family account to receive private setup details."},
-    {"@type":"HowToStep","name":"Choose a device","text":"Choose Android, iPhone or iPad, computer browser, or home router."},
+    {"@type":"HowToStep","name":"Choose a device","text":"Choose Android, iPhone or iPad, computer, or home router. Home-network setup must be connected from the signed-in guide before its private values appear."},
     {"@type":"HowToStep","name":"Turn on protection","text":"Follow the guided approvals for that device."},
     {"@type":"HowToStep","name":"Run the safe test","text":"Open the Sanctify safe test and confirm the calm page appears where supported."}
   ]
@@ -82,8 +82,8 @@
       <div class="threats two">
         <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-shield"/></svg></span><h3>Android phone or tablet</h3><p>Use the Sanctify app for guided, device-wide protection and the native calm intervention.</p><a class="btn btn-ghost" href="#android">Android steps</a></article>
         <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-heart"/></svg></span><h3>iPhone or iPad</h3><p>Install the Apple setup file for filtering, then enable the included Safari protection for the calm page.</p><a class="btn btn-ghost" href="#apple">Apple steps</a></article>
-        <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-sparkles"/></svg></span><h3>Windows, Mac, Linux, or Chromebook</h3><p>Complete the computer's network steps, then add Sanctify to Chrome or Edge.</p><a class="btn btn-ghost" href="#computer">Computer steps</a></article>
-        <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-shield"/></svg></span><h3>Home router</h3><p>Use the router as a whole-home backstop, then complete the local step on phones and computers.</p><a class="btn btn-ghost" href="#router">Router steps</a></article>
+        <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-sparkles"/></svg></span><h3>Windows, Mac, Linux, or Chromebook</h3><p>Use the signed Mac setup file or connect the current home network for Windows, Linux, or Chromebook, then add Sanctify to Chrome or Edge.</p><a class="btn btn-ghost" href="#computer">Computer steps</a></article>
+        <article class="threat light"><span class="icon-tile"><svg class="icon"><use href="/assets/icons.svg#i-shield"/></svg></span><h3>Home router</h3><p>Connect the current home Wi-Fi from the signed-in guide before entering its private values, then complete the local step on phones and computers.</p><a class="btn btn-ghost" href="#router">Router steps</a></article>
       </div>
     </div>
   </section>
@@ -118,9 +118,9 @@
     <div class="wrap">
       <div class="center"><p class="eyebrow">Computers</p><h2>Add the network layer and the calm browser page.</h2></div>
       <div class="vsteps">
-        <article class="vstep"><div class="num">01</div><div><h3>Open the matching device guide.</h3><p>Choose Windows, Mac, Linux, or Chromebook in the signed-in setup page. It supplies the family settings and the exact path for that computer.</p></div></article>
-        <article class="vstep"><div class="num">02</div><div><h3>Install Browser Protection.</h3><p>Choose Chrome or Edge from the Browser tab. Install only from the browser's official store.</p></div></article>
-        <article class="vstep"><div class="num">03</div><div><h3>Pair the browser.</h3><p>Create a one-time code in Device Setup and enter it in the Sanctify extension. The code works once and expires after ten minutes.</p></div></article>
+        <article class="vstep"><div class="num">01</div><div><h3>Open the matching device guide.</h3><p>Choose Windows, Mac, Linux, or Chromebook in the signed-in setup page. On Mac, download the signed setup file. On Windows, Linux, or Chromebook, join the intended home Wi-Fi and choose <strong>Connect this network</strong> before the two private values appear.</p></div></article>
+        <article class="vstep"><div class="num">02</div><div><h3>Finish the network steps.</h3><p>Install the signed Mac setup file, or enter the two private number addresses exactly where the device asks for custom name servers.</p></div></article>
+        <article class="vstep"><div class="num">03</div><div><h3>Install and pair Browser Protection.</h3><p>Choose Chrome or Edge from the Browser tab, install only from the official store, and enter the one-time family code within ten minutes.</p></div></article>
         <article class="vstep"><div class="num">04</div><div><h3>Run the safe test.</h3><p>Open <strong>sanctify-blocked.test</strong>. The family-specific Sanctify page should appear without a certificate warning.</p></div></article>
       </div>
       <div class="hero-cta"><a class="btn btn-primary" href="https://app.sanctify.faith/setup?onboarding=1&amp;tab=browser&amp;next=%2Fdashboard">Open computer setup</a><a class="btn btn-ghost" href="/browser-protection">Coverage and privacy</a></div>
@@ -132,7 +132,7 @@
       <div>
         <p class="eyebrow">Home router</p>
         <h2>Use one home-network layer without losing the local experience.</h2>
-        <p class="lead">The Router tab includes paths for TP-Link, ASUS, Netgear, Eero, Ubiquiti, and other routers. Enter the two private setup values where the router asks for primary and backup name servers.</p>
+        <p class="lead">The Router tab includes paths for TP-Link, ASUS, Netgear, Eero, Ubiquiti, and other routers. Join the home Wi-Fi and choose <strong>Connect this network</strong>. The two private setup values appear only after that signed-in connection succeeds.</p>
         <ul>
           <li>Cover home Wi-Fi<span>Devices using that router receive the network filtering backstop.</span></li>
           <li>Keep phones protected away from home<span>Complete the iPhone or Android setup on each mobile device.</span></li>
@@ -150,6 +150,7 @@
       <div class="faq">
         <details open><summary>How do I test without opening an unsafe website?</summary><p>Use the safe test from the signed-in guide. On a supported browser or Android device, it opens the calm Sanctify page. It never loads harmful content.</p></details>
         <details><summary>Why did Sanctify email me about a protection check?</summary><p>Sanctify could not confirm protection after more than one check. This can happen after a device update, restart, or network change and does not necessarily mean anyone changed a setting on purpose. Open Sanctify, choose <strong>Protect</strong>, and follow the guided check. Once protected activity is confirmed, Sanctify closes the alert automatically.</p></details>
+        <details><summary>Why do the number addresses say “Connect this network first”?</summary><p>Manual computer and router settings work only for the home connection your signed-in family authorizes. Join the intended home Wi-Fi, choose <strong>Connect this network</strong>, and the private values will appear. If your internet provider later changes the connection address, repeat that step.</p></details>
         <details><summary>Why did I see a normal connection error?</summary><p>The filtering layer may be active while the local Sanctify experience is not. On Android, check intervention and alert permissions. In Safari, Chrome, or Edge, confirm the Sanctify extension is enabled and paired.</p></details>
         <details><summary>Will the calm page appear on every screen?</summary><p>Android can surface it after supported blocked requests. Safari, Chrome, and Edge display it through their local protection. Televisions, consoles, and restricted app screens may show their normal connection message while the unsafe destination remains blocked.</p></details>
         <details><summary>Do I need an invitation code or a congregation?</summary><p>No. Every family can use Sanctify and subscribe without either one. Linking a congregation is optional and can be completed later.</p></details>
@@ -178,6 +179,6 @@
 </footer>
 <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/TWQUrK/klaviyo.js?company_id=TWQUrK"></script>
 <script type="text/javascript">!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
-<script src="/script.js?v=20260903-setup-guide"></script>
+<script src="/script.js?v=20260903-network-enrollment"></script>
 </body>
 </html>

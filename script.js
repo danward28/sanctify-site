@@ -21,7 +21,7 @@ const CONSENT_STORAGE_KEYS = {
   local: "sanctify:tracking-consent:v1",
   cookie: "sanctify_tracking_consent_v1",
 };
-const APP_SIGNUP_HOST = "app.sanctify.faith";
+const APP_HOST = "app.sanctify.faith";
 const FUNNEL_EVENT_ENDPOINT = "https://app.sanctify.faith/marketing/funnel-events";
 const FUNNEL_CLIENT_ID_KEY = "sanctify:funnel-client-id:v1";
 const POSTHOG_PROJECT_KEY = "phc_wrdQPfbQNZBPemwgKJmripmKxvKRAMRXYkNNsyvC3jNk";
@@ -616,7 +616,7 @@ const clearAttributionFields = () => {
   });
 };
 
-const enrichSignupLinks = () => {
+const enrichAppLinks = () => {
   const trackingEnabled = hasTrackingConsent();
   const currentParams = getTrackedParams();
   const attributionParams = trackingEnabled ? mergedAttributionParams() : currentParams;
@@ -636,7 +636,7 @@ const enrichSignupLinks = () => {
       return;
     }
 
-    if (url.hostname !== APP_SIGNUP_HOST || !url.pathname.startsWith("/signup")) {
+    if (url.hostname !== APP_HOST) {
       return;
     }
 
@@ -1009,11 +1009,11 @@ const applyConsentState = ({ trackPage = true } = {}) => {
     refreshAttributionState(true);
     syncPostHogAttribution();
     initKlaviyo();
-    enrichSignupLinks();
+    enrichAppLinks();
     populateAttributionFields();
   } else {
     refreshAttributionState(false);
-    enrichSignupLinks();
+    enrichAppLinks();
     populateAttributionFields();
   }
 
